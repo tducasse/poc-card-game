@@ -1,0 +1,132 @@
+image: barichello/godot-ci:3.3
+
+# Cache imported assets between runs
+cache:
+  key: import-assets
+  paths:
+    - .import/
+
+stages:
+  - web
+  # - server
+  - pages
+  - windows
+
+variables:
+  EXPORT_NAME: project-v5
+
+before_script:
+  # Remove lfs hook (https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/2245)
+  - rm .git/hooks/post-checkout || true
+
+# linux:
+#   stage: export
+#   script:
+#     - mkdir -v -p build/linux
+#     - godot -v --export "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+#   artifacts:
+#     name: $EXPORT_NAME-$CI_JOB_NAME
+#     paths:
+#       - build/linux
+
+# server:
+#   image: ruby
+#   only:
+#     - master
+#   stage: server
+#   script:
+#     - cd server
+#     - gem install dpl
+#     - dpl --provider=heroku --app=$APP_ID --api-key=$HEROKU_API_KEY
+
+windows:
+  only:
+    - master
+  stage: windows
+  script:
+    - mkdir -v -p build/windows
+    - godot -v --export "Windows Desktop" build/windows/$EXPORT_NAME.exe
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/windows
+
+# mac:
+#   stage: export
+#   script:
+#     - mkdir -v -p build/mac
+#     - godot -v --export "Mac OSX" build/mac/$EXPORT_NAME.zip
+#   artifacts:
+#     name: $EXPORT_NAME-$CI_JOB_NAME
+#     paths:
+#       - build/mac
+
+web:
+  only:
+    - master
+  stage: web
+  script:
+    - mkdir -v -p build/web
+    - godot -v --export "HTML5" build/web/index.html
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/web
+
+# # GitHub Pages Deploy
+# deploy-github-pages:
+#   stage: deploy
+#   dependencies:
+#     - web
+#   script:
+#     # This ensures the `gh-pages` branch is available.
+#     - git fetch
+#     - git checkout gh-pages
+#     - rm -f *.md
+#     - mv build/web/** .
+#     - git config user.email $GIT_EMAIL
+#     - git config user.name $GIT_USERNAME
+#     - git remote add github $REMOTE_URL
+#     - git add -A
+#     - 'git commit -m "ci: Deploy GitHub Page | $EXPORT_NAME:$CI_JOB_NAME" -m "Deploy from GitLab pipeline #$CI_PIPELINE_ID" || true'
+#     - git push github gh-pages -f
+
+# GitLab Pages Deploy
+pages:
+  only:
+    - master
+  image: ruby
+  stage: pages
+  dependencies:
+    - web
+  script:
+    - git fetch
+    - git checkout pages -f
+    - rm -f *.md
+    - mkdir public
+    - mv build/web/** ./public
+  artifacts:
+    paths:
+      - public
+# # Itch.io Deploy
+# itchio:linux:
+#   stage: deploy
+#   script:
+#     - butler push ./build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
+#   dependencies:
+#     - linux
+
+# itchio:windows:
+#   stage: deploy
+#   script:
+#     - butler push ./build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
+#   dependencies:
+#     - windows
+
+# itchio:macosx:
+#   stage: deploy
+#   script:
+#     - butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
+#   dependencies:
+#     - mac
+
