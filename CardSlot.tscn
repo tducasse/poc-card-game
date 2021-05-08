@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="CardSlot" type="MarginContainer"]
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 150.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 150, 240 )
+size_flags_horizontal = 0
+size_flags_vertical = 0

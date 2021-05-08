@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://DeckSlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Deck.gd" type="Script" id=2]
+
+[node name="Deck" type="VBoxContainer"]
+margin_left = 20.0
+margin_right = 32.0
+margin_bottom = 20.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeckSlot" parent="." instance=ExtResource( 1 )]
+margin_right = 150.0
+margin_bottom = 240.0
+
+[connection signal="pick_card" from="DeckSlot" to="." method="_on_DeckSlot_pick_card"]
