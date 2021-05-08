@@ -14,10 +14,10 @@ var my_id = 0
 
 
 func _ready():
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_join_succeed")
-	get_tree().connect("connection_failed", self, "_join_failed")
+	var _pc_status = get_tree().connect("network_peer_connected", self, "_player_connected")
+	var _pd_status = get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	var _js_status = get_tree().connect("connected_to_server", self, "_join_succeed")
+	var _jf_status = get_tree().connect("connection_failed", self, "_join_failed")
 
 
 # Client and Host method
