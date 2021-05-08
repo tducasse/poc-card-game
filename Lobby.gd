@@ -5,6 +5,8 @@ onready var port = $port
 onready var ip = $ip
 onready var players = $players
 onready var start = $start
+onready var host = $host
+onready var join = $join
 onready var connection_status = $connection_status
 onready var game = preload("res://GameBoard.tscn")
 
@@ -58,6 +60,8 @@ func control_status(status, peer):
 		my_id = get_tree().get_network_unique_id()
 		players_id[my_id] = my_id
 		update_players()
+		host.visible = false
+		join.visible = false
 		connection_status.text = "Success"
 	else:
 		peer.close_connection()
