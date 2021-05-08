@@ -3,7 +3,6 @@
 [ext_resource path="res://CardSlot.gd" type="Script" id=1]
 
 [node name="CardSlot" type="MarginContainer"]
-margin_bottom = 20.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,3 +14,8 @@ margin_bottom = 240.0
 rect_min_size = Vector2( 150, 240 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]

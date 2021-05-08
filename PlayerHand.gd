@@ -4,9 +4,11 @@ var Card = preload("res://Card.tscn")
 
 var slots = []
 
+
 func _ready():
-	for child in self.get_children():
-		slots.append(child)
+	mouse_filter = MOUSE_FILTER_IGNORE
+	for slot in self.get_children():
+		slots.append(slot)
 
 
 func get_empty_slots():
