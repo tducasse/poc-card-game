@@ -21,14 +21,14 @@ func _ready():
 
 
 # Client and Host method
-func _player_connected(other_id):
+func _player_connected(_other_id):
 	update_players()
 	if (my_id == 1):
 		start.visible = true
 
 
 # Client and Host method
-func _player_disconnected(other_id):
+func _player_disconnected(_other_id):
 	update_players()
 	if (my_id == 1):
 		start.visible = false
