@@ -23,4 +23,3 @@ func add_card(card_params):
 		return
 	var card = Card.instance()
 	empty_slots[0].put_card(card, card_params)
-	GM.register_card(card, GM.LOCATION.HAND, GM.PLAYERS.SELF)

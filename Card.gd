@@ -10,3 +10,8 @@ func _ready():
 func init(card_params):
 	Sprite.texture = load(card_params.image)
 	return self
+
+
+
+func _on_Card_input_event(viewport, event, shape_idx):
+	pass

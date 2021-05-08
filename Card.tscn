@@ -13,3 +13,5 @@ position = Vector2( 75, 120 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+
+[connection signal="input_event" from="." to="." method="_on_Card_input_event"]
