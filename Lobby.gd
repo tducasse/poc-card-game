@@ -13,8 +13,8 @@ var my_id = 0
 
 
 func _ready():
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	var _signal = get_tree().connect("network_peer_connected", self, "_player_connected")
+	var _signal2 = get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 
 
 # Client and Host method
