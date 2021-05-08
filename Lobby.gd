@@ -10,18 +10,18 @@ onready var join = $join
 onready var connection_status = $connection_status
 onready var game = preload("res://GameBoard.tscn")
 
-var players_id = {}
 var my_id = 0
 
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().connect("connected_to_server", self, "_join_succeed")
+	get_tree().connect("connection_failed", self, "_join_failed")
 
 
 # Client and Host method
 func _player_connected(other_id):
-	players_id[other_id] = other_id
 	update_players()
 	if (my_id == 1):
 		start.visible = true
@@ -29,17 +29,37 @@ func _player_connected(other_id):
 
 # Client and Host method
 func _player_disconnected(other_id):
-	players_id.erase(other_id)
 	update_players()
 	if (my_id == 1):
 		start.visible = false
 
 
+func _join_succeed():
+	update_players()
+	hide_join_host_buttons()
+	connection_status.text = "Success"
+
+
+func _join_failed():
+	players.text = "Players :"
+	join.visible = true
+	host.visible = true
+	connection_status.text = "Failure"
+
+
 func _on_host_pressed():
 	assert(port.text.is_valid_integer())
 	var peer = NetworkedMultiplayerENet.new()
-	var server_status = peer.create_server(int(port.text), 2)
-	control_status(server_status, peer)
+	var server_status = peer.create_server(int(port.text), 1)
+	if (server_status == 0):
+		get_tree().network_peer = peer
+		my_id = get_tree().get_network_unique_id()
+		update_players()
+		hide_join_host_buttons()
+		connection_status.text = "Success"
+	else:
+		peer.close_connection()
+		connection_status.text = "Failure"
 
 
 func _on_join_pressed():
@@ -47,32 +67,32 @@ func _on_join_pressed():
 	assert(port.text.is_valid_integer())
 	var peer = NetworkedMultiplayerENet.new()
 	var client_status = peer.create_client(ip.text, int(port.text))
-	control_status(client_status, peer)
+	if (client_status == 0):
+		get_tree().network_peer = peer
+		my_id = get_tree().get_network_unique_id()
+		hide_join_host_buttons()
+		connection_status.text = "Connecting..."
+	else:
+		peer.close_connection()
+		connection_status.text = "Failure"
 
 
 func _on_start_pressed():
 	rpc("goto_game")
 
 
-func control_status(status, peer):
-	if (status == 0):
-		get_tree().network_peer = peer
-		my_id = get_tree().get_network_unique_id()
-		players_id[my_id] = my_id
-		update_players()
-		host.visible = false
-		join.visible = false
-		connection_status.text = "Success"
-	else:
-		peer.close_connection()
-		connection_status.text = "Failure"
-
-
 func update_players():
 	var players_text = " Players :\n"
+	var players_id = get_tree().get_network_connected_peers()
+	players_id.append(my_id)
 	for id in players_id:
 		players_text += "\t Player%d\n" % [id]
 	players.text = players_text
+
+
+func hide_join_host_buttons() :
+	join.visible = false
+	host.visible = false
 
 
 remotesync func goto_game():
@@ -82,6 +102,8 @@ remotesync func goto_game():
 	players_node.set_name("Players")
 	game_instance.add_child(players_node)
 	
+	var players_id = get_tree().get_network_connected_peers()
+	players_id.append(my_id)
 	for id in players_id:
 		var player = Node2D.new()
 		player.set_name(str(id))
