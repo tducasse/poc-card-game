@@ -14,6 +14,10 @@ config/name="projectv5"
 run/main_scene="res://GameBoard.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GM="*res://GameManager.gd"
+
 [display]
 
 window/size/width=1920

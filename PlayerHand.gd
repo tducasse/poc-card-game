@@ -6,20 +6,21 @@ var slots = []
 
 func _ready():
 	for child in self.get_children():
-		slots.append({"slot": child, "card": null})
+		slots.append(child)
 
 
 func get_empty_slots():
 	var empty_slots = []
 	for slot in slots:
-		if slot.get("card") == null:
+		if slot.is_empty():
 			empty_slots.append(slot)
 	return empty_slots
 
-func add_card():
+
+func add_card(card_params):
 	var empty_slots = get_empty_slots()
 	if len(empty_slots) < 1:
 		return
 	var card = Card.instance()
-	empty_slots[0].get("slot").add_child(card)
-	empty_slots[0].card = card
+	empty_slots[0].put_card(card, card_params)
+	GM.register_card(card, GM.LOCATION.HAND, GM.PLAYERS.SELF)
