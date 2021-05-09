@@ -4,9 +4,6 @@ signal new_card(card_params)
 
 onready var DeckSlot = $DeckSlot
 
-func _ready():
-	pass # Replace with function body.
-
 
 func pick_random_card():
 	# this should pick a random card

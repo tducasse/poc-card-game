@@ -4,8 +4,14 @@ extends Node
 # warning-ignore:unused_signal
 signal card_selected(card)
 # warning-ignore:unused_signal
-signal card_unselected
+signal card_unselected()
 var selected_card = null
+
+# warning-ignore:unused_signal
+signal opponent_card_picked(card_params, slot_index)
+
+# warning-ignore:unused_signal
+signal opponent_move_card(old_loc, old_idx, new_loc, new_idx)
 
 
 func _ready():
