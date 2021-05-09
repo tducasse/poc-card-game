@@ -23,7 +23,7 @@ func move_card(hidden=false):
 		rpc("opponent_move_card", Events.selected_card.slot.location, Events.selected_card.slot.index, location, index)
 	Events.selected_card.move_card()
 	var new_card = Card.instance()
-	put_card(new_card, params, hidden)
+	put_card(new_card, params, false,  hidden)
 	Events.emit_signal("card_unselected")
 
 
