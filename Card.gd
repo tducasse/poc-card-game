@@ -6,7 +6,8 @@ onready var Attack = $Stats/Attack
 onready var Hp = $Stats/Hp
 var params = null
 var slot = null
-
+var current_attack = 0
+var current_hp = 0
 
 signal remove_card
 
@@ -17,6 +18,8 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 	slot = slot_item
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.hp)
+	current_hp = card_params.hp
+	current_attack = card_params.attack
 	if hidden:
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
@@ -33,10 +36,20 @@ func get_params():
 
 func _on_Card_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
-		Events.emit_signal("card_selected", self)
+		if not slot.opponent:
+			Events.emit_signal("card_selected", self)
+		else:
+			if Events.selected_card and not slot.location == "hand":
+				get_attacked(Events.selected_card)
 
 
-func move_card():
+func get_attacked(attacker):
+	lose_hp(attacker.get_attack())
+	attacker.lose_hp(current_attack)
+	Events.emit_signal("card_unselected")
+	
+
+func remove_card():
 	emit_signal("remove_card")
 
 
@@ -46,7 +59,14 @@ func get_attack():
 	
 func get_hp():
 	return params.hp
-	
+
+
+func lose_hp(hits):
+	current_hp = max(current_hp - hits, 0)
+	Hp.text = str(current_hp)
+	if current_hp == 0:
+		remove_card()
+
 
 func delete():
 	queue_free()
