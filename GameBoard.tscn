@@ -43,4 +43,13 @@ margin_bottom = 1037.0
 [node name="PlayerHP" parent="." instance=ExtResource( 4 )]
 margin_top = 1041.0
 
+[node name="Popup" type="AcceptDialog" parent="."]
+margin_top = 1080.0
+margin_right = 240.0
+margin_bottom = 1150.0
+rect_scale = Vector2( 2, 2 )
+window_title = "Game Over"
+
+[connection signal="confirmed" from="Popup" to="." method="_on_Popup_confirmed"]
+
 [editable path="Playground"]

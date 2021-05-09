@@ -16,6 +16,12 @@ signal opponent_move_card(old_loc, old_idx, new_loc, new_idx)
 # warning-ignore:unused_signal
 signal opponent_attacked(attackerPath, attackedPath)
 
+# warning-ignore:unused_signal
+signal opponent_lose_hp(lost)
+
+# warning-ignore:unused_signal
+signal game_over()
+
 
 func _ready():
 	var _signal = self.connect("card_selected", self, "_on_card_selected")

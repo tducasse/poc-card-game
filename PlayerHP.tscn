@@ -14,3 +14,14 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 940.0
+margin_right = 980.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]
