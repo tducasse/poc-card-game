@@ -65,6 +65,8 @@ func _on_Panel_gui_input(event):
 	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
 		if not Events.selected_card == null:
 			move_card()
+	elif event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_RIGHT:
+		Events.emit_signal("card_unselected")
 
 
 remote func opponent_move_card(old_loc, old_idx, new_loc, new_idx):
