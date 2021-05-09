@@ -27,4 +27,5 @@ func _on_card_selected(card):
 	
 	
 func _on_card_unselected():
+	selected_card.modulate = Color(1,1,1)
 	selected_card = null
