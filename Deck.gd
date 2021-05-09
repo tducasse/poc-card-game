@@ -7,10 +7,14 @@ onready var DeckSlot = $DeckSlot
 
 func pick_random_card():
 	# this should pick a random card
+	var atk = randi() % 8 + 1
+	var hp = randi() % 10 + 3
 	return {
 		"image": "res://icon.png",
-		"attack": randi() % 8 + 1,
-		"hp": randi() % 10 + 3,
+		"attack": atk,
+		"hp": hp,
+		"current_attack": atk,
+		"current_hp": hp
 	}
 
 

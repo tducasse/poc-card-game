@@ -6,8 +6,6 @@ onready var Attack = $Stats/Attack
 onready var Hp = $Stats/Hp
 var params = null
 var slot = null
-var current_attack = 0
-var current_hp = 0
 
 signal remove_card
 
@@ -17,9 +15,7 @@ func init(card_params, slot_item, hidden=false, opponent=false):
 	params = card_params
 	slot = slot_item
 	Attack.text = str(card_params.attack)
-	Hp.text = str(card_params.hp)
-	current_hp = card_params.hp
-	current_attack = card_params.attack
+	Hp.text = str(card_params.current_hp)
 	if (opponent):
 		Events.connect("opponent_attacked", self, "get_opponent_attacked")
 	if hidden:
@@ -48,7 +44,7 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 
 func get_attacked(attacker):
 	lose_hp(attacker.get_attack())
-	attacker.lose_hp(current_attack)
+	attacker.lose_hp(params.current_attack)
 	Events.emit_signal("card_unselected")
 
 
@@ -56,7 +52,8 @@ func get_opponent_attacked(attackerPath, attackedPath):
 	if(get_path() == attackedPath):
 		var attacker = get_node(attackerPath)
 		lose_hp(attacker.get_attack())
-		attacker.lose_hp(current_attack)
+		attacker.lose_hp(params.current_attack)
+
 
 remote func opponent_attacked(attackerPath, attackedPath):
 	Events.emit_signal("opponent_attacked", attackerPath, attackedPath)
@@ -75,9 +72,9 @@ func get_hp():
 
 
 func lose_hp(hits):
-	current_hp = max(current_hp - hits, 0)
-	Hp.text = str(current_hp)
-	if current_hp == 0:
+	params.current_hp = max(params.current_hp - hits, 0)
+	Hp.text = str(params.current_hp)
+	if params.current_hp == 0:
 		remove_card()
 
 
