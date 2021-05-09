@@ -38,7 +38,7 @@ func _on_game_over(winnerID):
 	popup.popup_centered()
 
 
-func _on_Popup_confirmed():
+func _on_Popup_popup_hide():
 	get_tree().network_peer = null
 	var lobby = load("res://Lobby.tscn")
 	var root_node = get_tree().get_root()
@@ -46,4 +46,3 @@ func _on_Popup_confirmed():
 	root_node.remove_child(gameboard_node)
 	gameboard_node.call_deferred("free")
 	root_node.add_child(lobby.instance())
-
