@@ -15,7 +15,9 @@ func init(idx, loc, opp = false):
 	index = idx
 	location = loc
 	opponent = opp
-	
+	if (opponent):
+		disable_click()
+
 
 func move_card(hidden=false):
 	var params = Events.selected_card.params
@@ -38,7 +40,8 @@ func put_card(new_card, card_params, _opponent=false, hidden=false):
 func _on_remove_card():
 	card.delete()
 	card = null
-	enable_click()
+	if (not opponent):
+		enable_click()
 
 
 func enable_click():
@@ -55,6 +58,7 @@ func is_empty():
 
 func set_opponent():
 	opponent = true
+	disable_click()
 
 
 func _on_Panel_gui_input(event):

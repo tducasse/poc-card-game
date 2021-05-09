@@ -17,7 +17,7 @@ func init(card_params, slot_item, hidden=false, opponent=false):
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.current_hp)
 	if (opponent):
-		Events.connect("opponent_attacked", self, "get_opponent_attacked")
+		var _signal = Events.connect("opponent_attacked", self, "get_opponent_attacked")
 	if hidden:
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
