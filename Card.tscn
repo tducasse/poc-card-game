@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Card.gd" type="Script" id=1]
+[ext_resource path="res://Bebas.tres" type="DynamicFont" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 75, 120 )
@@ -13,5 +14,33 @@ position = Vector2( 75, 120 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+
+[node name="Stats" type="HSplitContainer" parent="."]
+margin_left = 10.0
+margin_top = 200.0
+margin_right = 140.0
+margin_bottom = 239.0
+rect_min_size = Vector2( 130, 39 )
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="Label" parent="Stats"]
+margin_right = 59.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "6"
+
+[node name="Hp" type="Label" parent="Stats"]
+margin_left = 71.0
+margin_right = 130.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+align = 2
 
 [connection signal="input_event" from="." to="." method="_on_Card_input_event"]

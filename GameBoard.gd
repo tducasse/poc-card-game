@@ -7,6 +7,7 @@ onready var Playground = $Playground
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	mouse_filter = MOUSE_FILTER_IGNORE
 	var _signal = Events.connect("opponent_move_card", self, "_on_opponent_move_card")
 	
