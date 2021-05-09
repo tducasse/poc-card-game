@@ -20,6 +20,9 @@ func _ready():
 	
 
 func _on_card_selected(card):
+	if (selected_card != null):
+		selected_card.modulate = Color(1,1,1)
+	card.modulate = Color(0,0,1)
 	selected_card = card
 	
 	
