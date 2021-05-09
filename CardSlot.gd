@@ -17,21 +17,20 @@ func init(idx, loc, opp = false):
 	opponent = opp
 	
 
-func move_card():
+func move_card(hidden=false):
 	var params = Events.selected_card.params
 	if not opponent:
 		rpc("opponent_move_card", Events.selected_card.slot.location, Events.selected_card.slot.index, location, index)
 	Events.selected_card.move_card()
 	var new_card = Card.instance()
-	put_card(new_card, params)
+	put_card(new_card, params, hidden)
 	Events.emit_signal("card_unselected")
 
 
-func put_card(new_card, card_params, _opponent=false):
-	# opponent should be used to change the color or something
+func put_card(new_card, card_params, _opponent=false, hidden=false):
 	card = new_card
 	self.add_child(card)
-	card.init(card_params, self)
+	card.init(card_params, self, hidden, opponent)
 	card.connect("remove_card", self, "_on_remove_card")
 	disable_click()
 

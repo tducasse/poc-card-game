@@ -28,4 +28,5 @@ func _on_opponent_move_card(old_loc, old_idx, new_loc, new_idx):
 	var new_card_slot = new_location.get_card_slot(new_idx)
 	
 	Events.emit_signal("card_selected", card_to_move)
-	new_card_slot.move_card()
+	var hidden = new_loc == "hand"
+	new_card_slot.move_card(hidden)

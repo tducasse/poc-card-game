@@ -31,7 +31,8 @@ remote func opponent_add_card(card_params, slot_index):
 
 func add_opponent_card(card_params, slot_index):
 	var card = Card.instance()
-	slots[slot_index].put_card(card, card_params, opponent)
+	var hidden = true
+	slots[slot_index].put_card(card, card_params, opponent, hidden)
 
 
 func set_opponent():

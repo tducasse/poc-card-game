@@ -11,12 +11,19 @@ var slot = null
 signal remove_card
 
 
-func init(card_params, slot_item):
+func init(card_params, slot_item, hidden=false, _opponent=false):
+	# opponent should be used to change the color or something
 	params = card_params
 	slot = slot_item
-	Sprite.texture = load(card_params.image)
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.hp)
+	if hidden:
+		Sprite.texture = load('res://back.png')
+		Attack.hide()
+		Hp.hide()
+	else:
+		Sprite.texture = load(card_params.image)
+
 	return self
 
 
