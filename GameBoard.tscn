@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PlayerBoard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Playground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GameBoard.gd" type="Script" id=3]
+[ext_resource path="res://PlayerHP.tscn" type="PackedScene" id=4]
 
 [node name="GameBoard" type="VBoxContainer"]
 anchor_right = 1.0
@@ -12,25 +13,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="OpponentHP" parent="." instance=ExtResource( 4 )]
+margin_top = 0.0
+margin_bottom = 39.0
+opponent = true
+
 [node name="OpponentBoard" parent="." instance=ExtResource( 1 )]
+margin_top = 43.0
 margin_right = 1920.0
-margin_bottom = 240.0
+margin_bottom = 283.0
 opponent = true
 
 [node name="Playground" parent="." instance=ExtResource( 2 )]
-margin_top = 244.0
+margin_top = 287.0
 margin_right = 1920.0
-margin_bottom = 836.0
+margin_bottom = 793.0
 
 [node name="Container" parent="Playground" index="0"]
 margin_left = 577.0
-margin_top = 54.0
+margin_top = 11.0
 margin_right = 1343.0
-margin_bottom = 538.0
+margin_bottom = 495.0
 
 [node name="PlayerBoard" parent="." instance=ExtResource( 1 )]
-margin_top = 840.0
+margin_top = 797.0
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1037.0
+
+[node name="PlayerHP" parent="." instance=ExtResource( 4 )]
+margin_top = 1041.0
 
 [editable path="Playground"]
