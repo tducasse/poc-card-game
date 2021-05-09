@@ -2,6 +2,7 @@ extends CenterContainer
 
 
 onready var Container = $Container
+onready var OpponentBoard = $Container/OpponentBoard
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,6 +10,8 @@ func _ready():
 	Container.mouse_filter = MOUSE_FILTER_IGNORE
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func get_card(idx):
+	return OpponentBoard.get_card(idx)
+	
+func get_card_slot(idx):
+	return OpponentBoard.get_card_slot(idx)
