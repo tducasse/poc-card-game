@@ -12,6 +12,7 @@ func _ready():
 	var _signal = Events.connect("opponent_move_card", self, "_on_opponent_move_card")
 	var _go_status = Events.connect("game_over", self, "_on_game_over")
 	var _signal2 = Events.connect("opponent_attacked", self, "_on_opponent_attacked")
+	$Popup.get_close_button().hide()
 	
 	
 func find_location_node(loc):
@@ -39,16 +40,6 @@ func _on_game_over(winnerID):
 	popup.popup_centered()
 
 
-func _on_Popup_popup_hide():
-	get_tree().network_peer = null
-	var lobby = load("res://Lobby.tscn")
-	var root_node = get_tree().get_root()
-	var gameboard_node = get_node("/root/GameBoard")
-	root_node.remove_child(gameboard_node)
-	gameboard_node.call_deferred("free")
-	root_node.add_child(lobby.instance())
-
-
 func reverse_path(path : NodePath):
 	var str_path = str(path)
 	if str_path.find("OpponentBoard") > -1:
@@ -64,3 +55,13 @@ func _on_opponent_attacked(attacker_path, defender_path):
 
 remote func get_opponent_attacked(attacker_path, defender_path):
 	get_node(defender_path).get_opponent_attacked(attacker_path, defender_path)
+
+
+func _on_Popup_confirmed():
+	get_tree().network_peer = null
+	var lobby = load("res://Lobby.tscn")
+	var root_node = get_tree().get_root()
+	var gameboard_node = get_node("/root/GameBoard")
+	root_node.remove_child(gameboard_node)
+	gameboard_node.call_deferred("free")
+	root_node.add_child(lobby.instance())
