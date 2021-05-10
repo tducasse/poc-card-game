@@ -4,20 +4,23 @@
     "attack": 1,
     "hp": 1,
     "image": "res://icon.png",
-    "mana": 1
+    "mana": 1,
+    "max_turns": 1
   },
   {
     "name": "Advanced card",
     "attack": 2,
     "hp": 2,
     "image": "res://icon.png",
-    "mana": 2
+    "mana": 2,
+    "max_turns": 1
   },
   {
     "name": "Boss card",
     "attack": 3,
     "hp": 3,
     "image": "res://icon.png",
-    "mana": 3
+    "mana": 3,
+    "max_turns": 1
   }
 ]

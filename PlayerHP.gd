@@ -40,5 +40,6 @@ func _on_Panel_gui_input(event):
 			if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
 				if not GM.selected_card == null && not GM.selected_card.slot.location == "hand":
 					lose_hp(GM.selected_card.params.current_attack)
+					GM.selected_card.lose_turn()
 					rpc("call_opponent_lose_hp", GM.selected_card.params.current_attack)
 					GM.emit_signal("card_unselected")

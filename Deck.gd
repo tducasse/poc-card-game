@@ -29,6 +29,8 @@ func pick_random_card():
 	card["current_attack"] = card.attack
 	card["current_hp"] = card.hp
 	card["current_mana"] = card.mana
+	card["max_turns"] = card.max_turns
+	card["current_turns"] = card.max_turns
 	return card
 
 

@@ -13,6 +13,7 @@ signal remove_card
 
 
 func init(card_params, slot_item, hidden=false, _opponent=false):
+	var _st_status = GM.connect("start_turn", self, "_on_start_turn")
 	# opponent should be used to change the color or something
 	params = card_params
 	slot = slot_item
@@ -47,10 +48,10 @@ func get_params():
 func _on_Card_input_event(_viewport, event, _shape_idx):
 	if (GM.turns > 0) :
 		if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
-			if not slot.opponent:
+			if not slot.opponent && params.current_turns > 0:
 				GM.emit_signal("card_selected", self)
 			else:
-				if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand":
+				if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand" and GM.selected_card.params.current_turns > 0:
 					GM.emit_signal("opponent_attacked", GM.selected_card.get_path(), self.get_path())
 					get_attacked(GM.selected_card)
 		if event is InputEventMouseButton && event.pressed && event.doubleclick && event.button_index == BUTTON_LEFT:
@@ -62,6 +63,7 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 func get_attacked(attacker):
 	lose_hp(attacker.get_attack())
 	attacker.lose_hp(params.current_attack)
+	attacker.lose_turn()
 	GM.emit_signal("card_unselected")
 
 
@@ -89,6 +91,16 @@ func lose_hp(hits):
 	if params.current_hp == 0:
 		remove_card()
 
+func lose_turn():
+	params.current_turns = max(0, params.current_turns - 1)
+	if (params.current_turns == 0):
+		Sprite.modulate = Color(1,0,0)
+
 
 func delete():
 	queue_free()
+
+
+func _on_start_turn():
+	params.current_turns = params.max_turns
+	Sprite.modulate = Color(1,1,1)
