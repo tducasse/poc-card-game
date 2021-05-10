@@ -22,6 +22,19 @@ signal opponent_lose_hp(lost)
 # warning-ignore:unused_signal
 signal game_over()
 
+# warning-ignore:unused_signal
+signal add_mana(add)
+# warning-ignore:unused_signal
+signal lose_mana(lost)
+# warning-ignore:unused_signal
+signal opponent_add_mana(add)
+# warning-ignore:unused_signal
+signal opponent_lose_mana(lost)
+
+
+var mana = 10
+var opponent_mana = 10
+
 
 func _ready():
 	var _signal = self.connect("card_selected", self, "_on_card_selected")

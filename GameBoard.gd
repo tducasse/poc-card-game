@@ -9,9 +9,9 @@ onready var popup = $Popup
 func _ready():
 	randomize()
 	mouse_filter = MOUSE_FILTER_IGNORE
-	var _signal = Events.connect("opponent_move_card", self, "_on_opponent_move_card")
-	var _go_status = Events.connect("game_over", self, "_on_game_over")
-	var _signal2 = Events.connect("opponent_attacked", self, "_on_opponent_attacked")
+	var _signal = GM.connect("opponent_move_card", self, "_on_opponent_move_card")
+	var _go_status = GM.connect("game_over", self, "_on_game_over")
+	var _signal2 = GM.connect("opponent_attacked", self, "_on_opponent_attacked")
 	$Popup.get_close_button().hide()
 	
 	
@@ -30,7 +30,7 @@ func _on_opponent_move_card(old_loc, old_idx, new_loc, new_idx):
 	var card_to_move = location.get_card(old_idx)
 	var new_card_slot = new_location.get_card_slot(new_idx)
 	
-	Events.emit_signal("card_selected", card_to_move)
+	GM.emit_signal("card_selected", card_to_move)
 	var hidden = new_loc == "hand"
 	new_card_slot.move_card(hidden)
 

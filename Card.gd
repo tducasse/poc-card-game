@@ -4,6 +4,7 @@ var selected = false
 onready var Sprite = $CollisionShape2D/Sprite
 onready var Attack = $Stats/Attack
 onready var Hp = $Stats/Hp
+onready var Mana = $Mana
 var params = null
 var slot = null
 
@@ -16,6 +17,7 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 	slot = slot_item
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.current_hp)
+	Mana.text = str(card_params.mana)
 	if hidden:
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
@@ -33,17 +35,17 @@ func get_params():
 func _on_Card_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
 		if not slot.opponent:
-			Events.emit_signal("card_selected", self)
+			GM.emit_signal("card_selected", self)
 		else:
-			if Events.selected_card and not slot.location == "hand" and not Events.selected_card.slot.location == "hand":
-				Events.emit_signal("opponent_attacked", Events.selected_card.get_path(), self.get_path())
-				get_attacked(Events.selected_card)
+			if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand":
+				GM.emit_signal("opponent_attacked", GM.selected_card.get_path(), self.get_path())
+				get_attacked(GM.selected_card)
 
 
 func get_attacked(attacker):
 	lose_hp(attacker.get_attack())
 	attacker.lose_hp(params.current_attack)
-	Events.emit_signal("card_unselected")
+	GM.emit_signal("card_unselected")
 
 
 func get_opponent_attacked(attacker_path, defender_path):

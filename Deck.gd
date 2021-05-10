@@ -9,12 +9,15 @@ func pick_random_card():
 	# this should pick a random card
 	var atk = randi() % 8 + 1
 	var hp = randi() % 10 + 3
+	var mana = 1
+	var image = "res://icon.png"
 	return {
-		"image": "res://icon.png",
+		"image": image,
 		"attack": atk,
 		"hp": hp,
 		"current_attack": atk,
-		"current_hp": hp
+		"current_hp": hp,
+		"mana": mana
 	}
 
 

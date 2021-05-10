@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 onready var PlayerHand = $PlayerHand
-
+onready var PlayerMana = $PlayerMana
 onready var Deck = $Deck
 
 export var opponent = false
@@ -11,6 +11,7 @@ func _ready():
 	if opponent:
 		Deck.set_opponent()
 		PlayerHand.set_opponent()
+	PlayerMana.init(opponent)
 
 
 func _on_Deck_new_card(card_params):

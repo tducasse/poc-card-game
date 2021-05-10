@@ -44,14 +44,12 @@ margin_bottom = 1037.0
 margin_top = 1041.0
 
 [node name="Popup" type="AcceptDialog" parent="."]
-margin_top = 1080.0
-margin_right = 240.0
-margin_bottom = 1150.0
-rect_scale = Vector2( 2, 2 )
+margin_top = 1062.0
+margin_right = 1920.0
+margin_bottom = 1120.0
 popup_exclusive = true
 window_title = "Game Over"
 
 [connection signal="confirmed" from="Popup" to="." method="_on_Popup_confirmed"]
-[connection signal="popup_hide" from="Popup" to="." method="_on_Popup_popup_hide"]
 
 [editable path="Playground"]

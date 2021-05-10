@@ -20,13 +20,19 @@ func init(idx, loc, opp = false):
 
 
 func move_card(hidden=false):
-	var params = Events.selected_card.params
+	var params = GM.selected_card.params
+	if location == "board" && GM.selected_card.slot.location == "hand" && not opponent:
+		if GM.mana >= params.mana:
+			GM.emit_signal("lose_mana", params.mana)
+		else:
+			GM.emit_signal("card_unselected")
+			return
 	if not opponent:
-		rpc("opponent_move_card", Events.selected_card.slot.location, Events.selected_card.slot.index, location, index)
-	Events.selected_card.remove_card()
+		rpc("opponent_move_card", GM.selected_card.slot.location, GM.selected_card.slot.index, location, index)
+	GM.selected_card.remove_card()
 	var new_card = Card.instance()
 	put_card(new_card, params, false,  hidden)
-	Events.emit_signal("card_unselected")
+	GM.emit_signal("card_unselected")
 
 
 func put_card(new_card, card_params, _opponent=false, hidden=false):
@@ -63,11 +69,11 @@ func set_opponent():
 
 func _on_Panel_gui_input(event):
 	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
-		if not Events.selected_card == null:
+		if not GM.selected_card == null:
 			move_card()
 	elif event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_RIGHT:
-		Events.emit_signal("card_unselected")
+		GM.emit_signal("card_unselected")
 
 
 remote func opponent_move_card(old_loc, old_idx, new_loc, new_idx):
-	Events.emit_signal("opponent_move_card", old_loc, old_idx, new_loc, new_idx)
+	GM.emit_signal("opponent_move_card", old_loc, old_idx, new_loc, new_idx)

@@ -26,7 +26,7 @@ func add_card(card_params):
 
 
 remote func opponent_add_card(card_params, slot_index):
-	Events.emit_signal("opponent_card_picked", card_params, slot_index)
+	GM.emit_signal("opponent_card_picked", card_params, slot_index)
 
 
 func add_opponent_card(card_params, slot_index):
@@ -37,7 +37,7 @@ func add_opponent_card(card_params, slot_index):
 
 func set_opponent():
 	opponent = true
-	var _signal = Events.connect("opponent_card_picked", self, 'add_opponent_card')
+	var _signal = GM.connect("opponent_card_picked", self, 'add_opponent_card')
 	var children = self.get_children()
 	for index in len(children):
 		var slot = children[index]
