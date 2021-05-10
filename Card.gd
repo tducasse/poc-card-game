@@ -10,14 +10,12 @@ var slot = null
 signal remove_card
 
 
-func init(card_params, slot_item, hidden=false, opponent=false):
+func init(card_params, slot_item, hidden=false, _opponent=false):
 	# opponent should be used to change the color or something
 	params = card_params
 	slot = slot_item
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.current_hp)
-	if (opponent):
-		var _signal = Events.connect("opponent_attacked", self, "get_opponent_attacked")
 	if hidden:
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
@@ -37,8 +35,8 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 		if not slot.opponent:
 			Events.emit_signal("card_selected", self)
 		else:
-			if Events.selected_card and not slot.location == "hand":
-				rpc("opponent_attacked", Events.selected_card.get_path(), self.get_path())
+			if Events.selected_card and not slot.location == "hand" and not Events.selected_card.slot.location == "hand":
+				Events.emit_signal("opponent_attacked", Events.selected_card.get_path(), self.get_path())
 				get_attacked(Events.selected_card)
 
 
@@ -53,11 +51,6 @@ func get_opponent_attacked(attackerPath, attackedPath):
 		var attacker = get_node(attackerPath)
 		lose_hp(attacker.get_attack())
 		attacker.lose_hp(params.current_attack)
-
-
-remote func opponent_attacked(attackerPath, attackedPath):
-	Events.emit_signal("opponent_attacked", attackerPath, attackedPath)
-
 
 func remove_card():
 	emit_signal("remove_card")

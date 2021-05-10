@@ -11,6 +11,7 @@ func _ready():
 	mouse_filter = MOUSE_FILTER_IGNORE
 	var _signal = Events.connect("opponent_move_card", self, "_on_opponent_move_card")
 	var _go_status = Events.connect("game_over", self, "_on_game_over")
+	var _signal2 = Events.connect("opponent_attacked", self, "_on_opponent_attacked")
 	
 	
 func find_location_node(loc):
@@ -46,3 +47,20 @@ func _on_Popup_popup_hide():
 	root_node.remove_child(gameboard_node)
 	gameboard_node.call_deferred("free")
 	root_node.add_child(lobby.instance())
+
+
+func reverse_path(path : NodePath):
+	var str_path = str(path)
+	if str_path.find("OpponentBoard") > -1:
+		str_path.replace("OpponentBoard", "PlayerBoard")
+	elif str_path.find("PlayerBoard") > -1:
+		str_path.replace("PlayerBoard", "OpponentBoard")
+	return str_path
+	
+
+func _on_opponent_attacked(attacker_path, defender_path):
+	rpc("get_opponent_attacked", reverse_path(attacker_path), reverse_path(defender_path))
+	
+
+remote func get_opponent_attacked(attacker_path, defender_path):
+	get_node(defender_path).get_opponent_attacked(attacker_path, defender_path)
