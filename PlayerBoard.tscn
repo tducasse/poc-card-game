@@ -22,15 +22,16 @@ margin_bottom = 600.0
 
 [node name="PlayerData" type="VSplitContainer" parent="."]
 margin_left = 770.0
-margin_right = 884.0
+margin_right = 878.0
 margin_bottom = 600.0
 
 [node name="PlayerMana" parent="PlayerData" instance=ExtResource( 4 )]
-margin_top = 0.0
-margin_right = 114.0
-margin_bottom = 39.0
+margin_top = 280.0
+margin_right = 108.0
+margin_bottom = 319.0
 
 [node name="EndTurn" type="Button" parent="PlayerData"]
+visible = false
 margin_top = 51.0
 margin_right = 114.0
 margin_bottom = 96.0
@@ -40,8 +41,9 @@ custom_fonts/font = ExtResource( 5 )
 text = "End turn"
 
 [node name="Deck" parent="." instance=ExtResource( 1 )]
-margin_left = 888.0
-margin_right = 1038.0
+margin_left = 882.0
+margin_right = 1032.0
 margin_bottom = 600.0
 
+[connection signal="pressed" from="PlayerData/EndTurn" to="." method="_on_EndTurn_pressed"]
 [connection signal="new_card" from="Deck" to="." method="_on_Deck_new_card"]

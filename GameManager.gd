@@ -21,6 +21,8 @@ signal opponent_lose_hp(lost)
 
 # warning-ignore:unused_signal
 signal game_over()
+# warning-ignore:unused_signal
+signal start_game()
 
 # warning-ignore:unused_signal
 signal add_mana(add)
@@ -31,15 +33,21 @@ signal opponent_add_mana(add)
 # warning-ignore:unused_signal
 signal opponent_lose_mana(lost)
 
+# warning-ignore:unused_signal
+signal end_turn()
+# warning-ignore:unused_signal
+signal start_turn()
 
 var mana = 10
 var opponent_mana = 10
-
+var turns = 0
 
 func _ready():
 	var _signal = self.connect("card_selected", self, "_on_card_selected")
 	var _signal2 = self.connect("card_unselected", self, "_on_card_unselected")
-	
+	var _signal3 = self.connect("end_turn", self, "_on_end_turn")
+	var _signal4 = self.connect("start_game", self, "_on_start_game")
+
 
 func _on_card_selected(card):
 	if (selected_card != null):
@@ -52,3 +60,27 @@ func _on_card_unselected():
 	if (selected_card != null):
 		selected_card.modulate = Color(1,1,1)
 	selected_card = null
+
+
+func _on_end_turn():
+	emit_signal("card_unselected")
+	turns = max(turns - 1, 0)
+	if (turns == 0):
+		rpc("call_opponent_add_turn")
+	else:
+		emit_signal("start_turn")
+
+
+func add_turn():
+	turns += 1
+
+
+remote func call_opponent_add_turn():
+	add_turn()
+	emit_signal("start_turn")
+
+
+func _on_start_game():
+	if (get_tree().get_network_unique_id() == 1):
+		add_turn()
+		emit_signal("start_turn")

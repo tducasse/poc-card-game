@@ -45,17 +45,18 @@ func get_params():
 
 
 func _on_Card_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
-		if not slot.opponent:
-			GM.emit_signal("card_selected", self)
-		else:
-			if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand":
-				GM.emit_signal("opponent_attacked", GM.selected_card.get_path(), self.get_path())
-				get_attacked(GM.selected_card)
-	if event is InputEventMouseButton && event.pressed && event.doubleclick && event.button_index == BUTTON_LEFT:
-		if not slot.opponent or not slot.location == "hand":
-			GM.emit_signal("card_unselected")
-			Info.popup_centered()
+	if (GM.turns > 0) :
+		if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
+			if not slot.opponent:
+				GM.emit_signal("card_selected", self)
+			else:
+				if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand":
+					GM.emit_signal("opponent_attacked", GM.selected_card.get_path(), self.get_path())
+					get_attacked(GM.selected_card)
+		if event is InputEventMouseButton && event.pressed && event.doubleclick && event.button_index == BUTTON_LEFT:
+			if not slot.opponent or not slot.location == "hand":
+				GM.emit_signal("card_unselected")
+				Info.popup_centered()
 
 
 func get_attacked(attacker):

@@ -13,8 +13,8 @@ func _ready():
 	var _go_status = GM.connect("game_over", self, "_on_game_over")
 	var _signal2 = GM.connect("opponent_attacked", self, "_on_opponent_attacked")
 	$Popup.get_close_button().hide()
-	
-	
+
+
 func find_location_node(loc):
 	var location = null
 	if loc == "hand":

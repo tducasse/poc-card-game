@@ -115,3 +115,4 @@ remotesync func goto_game():
 	root_node.remove_child(lobby_node)
 	lobby_node.call_deferred("free")
 	root_node.add_child(game_instance)
+	GM.emit_signal("start_game")

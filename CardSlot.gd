@@ -68,11 +68,12 @@ func set_opponent():
 
 
 func _on_Panel_gui_input(event):
-	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
-		if not GM.selected_card == null:
-			move_card()
-	elif event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_RIGHT:
-		GM.emit_signal("card_unselected")
+	if (GM.turns > 0):
+		if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
+			if not GM.selected_card == null:
+				move_card()
+		elif event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_RIGHT:
+			GM.emit_signal("card_unselected")
 
 
 remote func opponent_move_card(old_loc, old_idx, new_loc, new_idx):
