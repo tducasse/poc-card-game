@@ -26,12 +26,19 @@ func _ready():
 
 func pick_random_card():
 	var card = cards[randi() % cards.size()]
-	card["current_attack"] = card.attack
-	card["current_hp"] = card.hp
-	card["current_mana"] = card.mana
-	card["max_turns"] = card.max_turns
-	card["current_turns"] = card.max_turns
-	return card
+	var copyCard = {
+		"name": card.name,
+		"attack": card.attack,
+		"hp": card.hp,
+		"image": card.image,
+		"mana": card.mana,
+		"current_attack": card.attack,
+		"current_hp": card.hp,
+		"current_mana": card.mana,
+		"max_turns": card.max_turns,
+		"current_turns": card.max_turns
+	}
+	return copyCard
 
 
 func _on_DeckSlot_pick_card():

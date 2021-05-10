@@ -61,10 +61,10 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 
 
 func get_attacked(attacker):
-	lose_hp(attacker.get_attack())
-	attacker.lose_hp(params.current_attack)
 	attacker.lose_turn()
+	attacker.lose_hp(params.current_attack)
 	GM.emit_signal("card_unselected")
+	lose_hp(attacker.get_attack())
 
 
 func get_opponent_attacked(attacker_path, defender_path):
