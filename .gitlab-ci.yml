@@ -7,9 +7,9 @@ cache:
     - .import/
 
 stages:
-  - web
+  # - web
   # - server
-  - pages
+  # - pages
   - windows
 
 variables:
@@ -61,17 +61,17 @@ windows:
 #     paths:
 #       - build/mac
 
-web:
-  only:
-    - master
-  stage: web
-  script:
-    - mkdir -v -p build/web
-    - godot -v --export "HTML5" build/web/index.html
-  artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/web
+# web:
+#   only:
+#     - master
+#   stage: web
+#   script:
+#     - mkdir -v -p build/web
+#     - godot -v --export "HTML5" build/web/index.html
+#   artifacts:
+#     name: $EXPORT_NAME-$CI_JOB_NAME
+#     paths:
+#       - build/web
 
 # # GitHub Pages Deploy
 # deploy-github-pages:
@@ -92,22 +92,22 @@ web:
 #     - git push github gh-pages -f
 
 # GitLab Pages Deploy
-pages:
-  only:
-    - master
-  image: ruby
-  stage: pages
-  dependencies:
-    - web
-  script:
-    - git fetch
-    - git checkout pages -f
-    - rm -f *.md
-    - mkdir public
-    - mv build/web/** ./public
-  artifacts:
-    paths:
-      - public
+# pages:
+#   only:
+#     - master
+#   image: ruby
+#   stage: pages
+#   dependencies:
+#     - web
+#   script:
+#     - git fetch
+#     - git checkout pages -f
+#     - rm -f *.md
+#     - mkdir public
+#     - mv build/web/** ./public
+#   artifacts:
+#     paths:
+#       - public
 # # Itch.io Deploy
 # itchio:linux:
 #   stage: deploy
