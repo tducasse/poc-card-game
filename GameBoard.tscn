@@ -47,6 +47,7 @@ margin_top = 1041.0
 margin_top = 1062.0
 margin_right = 121.0
 margin_bottom = 1120.0
+rect_scale = Vector2( 2, 2 )
 popup_exclusive = true
 window_title = "Game Over"
 
