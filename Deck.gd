@@ -28,6 +28,7 @@ func pick_random_card():
 	var card = cards[randi() % cards.size()]
 	card["current_attack"] = card.attack
 	card["current_hp"] = card.hp
+	card["current_mana"] = card.mana
 	return card
 
 

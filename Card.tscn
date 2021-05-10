@@ -53,4 +53,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Info" type="AcceptDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Info"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="input_event" from="." to="." method="_on_Card_input_event"]

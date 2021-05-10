@@ -5,6 +5,7 @@ onready var Sprite = $CollisionShape2D/Sprite
 onready var Attack = $Stats/Attack
 onready var Hp = $Stats/Hp
 onready var Mana = $Mana
+onready var Info = $Info
 var params = null
 var slot = null
 
@@ -17,7 +18,7 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 	slot = slot_item
 	Attack.text = str(card_params.attack)
 	Hp.text = str(card_params.current_hp)
-	Mana.text = str(card_params.mana)
+	Mana.text = str(card_params.current_mana)
 	if hidden:
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
@@ -25,7 +26,18 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 		Mana.hide()
 	else:
 		Sprite.texture = load(card_params.image)
+	init_info()
 	return self
+
+
+func init_info():
+	var info_text = ''
+	for key in params.keys():
+		if not key.begins_with("current"):
+			info_text = info_text + key + ": " + str(params[key]) + '\n\n'
+	Info.dialog_text = info_text
+	var font = load("res://Bebas.tres")
+	Info.get_label().add_font_override('font', font)
 
 
 func get_params():
@@ -40,6 +52,10 @@ func _on_Card_input_event(_viewport, event, _shape_idx):
 			if GM.selected_card and not slot.location == "hand" and not GM.selected_card.slot.location == "hand":
 				GM.emit_signal("opponent_attacked", GM.selected_card.get_path(), self.get_path())
 				get_attacked(GM.selected_card)
+	if event is InputEventMouseButton && event.pressed && event.doubleclick && event.button_index == BUTTON_LEFT:
+		if not slot.opponent or not slot.location == "hand":
+			GM.emit_signal("card_unselected")
+			Info.popup_centered()
 
 
 func get_attacked(attacker):

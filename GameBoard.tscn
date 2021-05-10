@@ -27,25 +27,26 @@ opponent = true
 [node name="Playground" parent="." instance=ExtResource( 2 )]
 margin_top = 287.0
 margin_right = 1920.0
-margin_bottom = 793.0
+margin_bottom = 833.0
 
 [node name="Container" parent="Playground" index="0"]
 margin_left = 577.0
-margin_top = 11.0
+margin_top = 31.0
 margin_right = 1343.0
-margin_bottom = 495.0
+margin_bottom = 515.0
 
 [node name="PlayerBoard" parent="." instance=ExtResource( 1 )]
-margin_top = 797.0
+margin_top = 837.0
 margin_right = 1920.0
-margin_bottom = 1037.0
+margin_bottom = 1077.0
 
 [node name="PlayerHP" parent="." instance=ExtResource( 4 )]
-margin_top = 1041.0
+margin_top = 1081.0
+margin_bottom = 1120.0
 
 [node name="Popup" type="AcceptDialog" parent="."]
 margin_top = 1062.0
-margin_right = 1920.0
+margin_right = 121.0
 margin_bottom = 1120.0
 popup_exclusive = true
 window_title = "Game Over"
