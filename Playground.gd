@@ -1,13 +1,12 @@
 extends CenterContainer
 
-
-onready var Container = $Container
-onready var OpponentBoard = $Container/OpponentBoard
+onready var Boards = $Boards
+onready var OpponentBoard = $Boards/OpponentBoard
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mouse_filter = MOUSE_FILTER_IGNORE
-	Container.mouse_filter = MOUSE_FILTER_IGNORE
+	Boards.mouse_filter = MOUSE_FILTER_IGNORE
 
 
 func get_card(idx):
