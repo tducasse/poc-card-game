@@ -22,9 +22,9 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 		Sprite.texture = load('res://back.png')
 		Attack.hide()
 		Hp.hide()
+		Mana.hide()
 	else:
 		Sprite.texture = load(card_params.image)
-
 	return self
 
 
