@@ -46,9 +46,9 @@ func get_attacked(attacker):
 	Events.emit_signal("card_unselected")
 
 
-func get_opponent_attacked(attackerPath, attackedPath):
-	if(get_path() == attackedPath):
-		var attacker = get_node(attackerPath)
+func get_opponent_attacked(attacker_path, defender_path):
+	if(get_path() == defender_path):
+		var attacker = get_node(attacker_path)
 		lose_hp(attacker.get_attack())
 		attacker.lose_hp(params.current_attack)
 

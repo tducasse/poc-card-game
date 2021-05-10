@@ -52,9 +52,9 @@ func _on_Popup_popup_hide():
 func reverse_path(path : NodePath):
 	var str_path = str(path)
 	if str_path.find("OpponentBoard") > -1:
-		str_path.replace("OpponentBoard", "PlayerBoard")
+		str_path = str_path.replace("OpponentBoard", "PlayerBoard")
 	elif str_path.find("PlayerBoard") > -1:
-		str_path.replace("PlayerBoard", "OpponentBoard")
+		str_path = str_path.replace("PlayerBoard", "OpponentBoard")
 	return str_path
 	
 
