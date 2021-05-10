@@ -1,7 +1,7 @@
 extends Label
 
 export var opponent = false
-var hp = 4
+var hp = 15
 
 
 func _ready():

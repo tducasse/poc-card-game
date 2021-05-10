@@ -38,8 +38,9 @@ signal end_turn()
 # warning-ignore:unused_signal
 signal start_turn()
 
-var mana = 10
-var opponent_mana = 10
+var mana = 0
+var mana_max = 0
+var opponent_mana = 0
 var turns = 0
 
 func _ready():
@@ -47,7 +48,7 @@ func _ready():
 	var _signal2 = self.connect("card_unselected", self, "_on_card_unselected")
 	var _signal3 = self.connect("end_turn", self, "_on_end_turn")
 	var _signal4 = self.connect("start_game", self, "_on_start_game")
-
+	var _signal5 = self.connect("start_turn", self, "_on_start_turn")
 
 func _on_card_selected(card):
 	if (selected_card != null):
@@ -69,6 +70,11 @@ func _on_end_turn():
 		rpc("call_opponent_add_turn")
 	else:
 		emit_signal("start_turn")
+
+
+func _on_start_turn():
+	mana_max = min(10, mana_max + 1)
+	emit_signal("add_mana", mana_max - mana)
 
 
 func add_turn():
