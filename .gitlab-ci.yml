@@ -40,6 +40,7 @@ before_script:
 #     - dpl --provider=heroku --app=$APP_ID --api-key=$HEROKU_API_KEY
 
 windows:
+  when: manual
   only:
     - master
   stage: windows
