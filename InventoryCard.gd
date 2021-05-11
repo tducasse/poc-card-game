@@ -6,22 +6,78 @@ onready var Name = $OuterContainer/Container/TopContainer/TopRow/Name
 onready var Mana = $OuterContainer/Container/TopContainer/TopRow/Mana
 onready var Attack = $OuterContainer/Container/BottomContainer/BottomRow/Attack
 onready var Hp = $OuterContainer/Container/BottomContainer/BottomRow/Hp
+onready var EditPopup = $EditPopup
+onready var SpritePopup = $EditPopup/Container/Sprite
+onready var NamePopup = $EditPopup/Container/Name
+onready var ManaPopup = $EditPopup/Container/Mana
+onready var AttackPopup = $EditPopup/Container/Attack
+onready var HpPopup = $EditPopup/Container/Hp
 
+signal edited(old_name, new_card)
+
+var card = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 func init(params):
+	card = params
 	Sprite.texture = load(params.image)
 	Name.text = str(params.name)
 	Mana.text = str(params.mana)
 	if params.has("attack"):
 		Attack.text = str(params.attack)
-	if params.has("damage"):
+	elif params.has("damage"):
 		Attack.text = str(params.damage)
+	else:
+		Attack.hide()
 	if params.has("hp"):
 		Hp.text = str(params.hp)
-	if params.has("heal"):
+	elif params.has("heal"):
 		Hp.text = str(params.heal)
+	else:
+		Hp.hide()
+
+
+func _on_InventoryCard_gui_input(event):
+	if event is InputEventMouseButton && event.pressed && event.doubleclick && event.button_index == BUTTON_LEFT:
+		SpritePopup.text = str(card.image)
+		NamePopup.text = str(card.name)
+		ManaPopup.text = str(card.mana)
+		if card.has("attack"):
+			AttackPopup.text = str(card.attack)
+		elif card.has("damage"):
+			AttackPopup.text = str(card.damage)
+		else:
+			AttackPopup.hide()
+		if card.has("hp"):
+			HpPopup.text = str(card.hp)
+		elif card.has("heal"):
+			HpPopup.text = str(card.heal)
+		else:
+			HpPopup.hide()
+		EditPopup.popup_centered()
+
+
+func _on_EditPopup_confirmed():
+	var new_card = {
+		"name": NamePopup.text,
+		"mana": int(ManaPopup.text),
+		"image": SpritePopup.text,
+		"type": card.type
+	}
+	if card.has("max_turns"):
+		new_card["max_turns"] = int(card.max_turns)
+	if card.has("attack"):
+		new_card["attack"] = int(AttackPopup.text)
+	if card.has("damage"):
+		new_card["damage"] = int(AttackPopup.text)
+	if card.has("hp"):
+		new_card["hp"] = int(HpPopup.text)
+	if card.has("heal"):
+		new_card["heal"] = int(HpPopup.text)
+	var old_name = card.name
+	init(new_card)
+	emit_signal("edited", old_name, new_card)

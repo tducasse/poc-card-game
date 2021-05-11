@@ -18,6 +18,14 @@ func load_json_file(path):
 		return null
 	var obj = result_json.result
 	return obj
+	
+
+func save_as_json(path, data):
+	var file = File.new()
+	file.open(path, File.WRITE)
+	file.store_line(JSON.print(data ,"  "))
+	file.close()
+
 
 func _ready():
 	cards = load_json_file("res://cards.json")
@@ -27,7 +35,20 @@ func _ready():
 func add_card(card):
 	var card_instance = Card.instance()
 	Cards.add_child(card_instance)
-	card_instance.init(card)
+	card_instance.connect("edited", self, "card_edited")
+	card_instance.init(card.duplicate())
+
+
+func card_edited(old_name, new_card):
+	for index in len(cards):
+		var card = cards[index]
+		if card.name == old_name:
+			for key in card.keys():
+				if new_card.has(key) and not card[key] == new_card[key]:
+					card[key] = new_card[key]
+			break
+	save_as_json("res://cards.json", cards)
+
 
 
 func add_cards():
