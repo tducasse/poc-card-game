@@ -1,7 +1,7 @@
 extends MarginContainer
 
 
-onready var Sprite = $OuterContainer/Container/Sprite
+onready var Sprite_obj = $OuterContainer/Container/Sprite
 onready var Name = $OuterContainer/Container/TopContainer/TopRow/Name
 onready var Mana = $OuterContainer/Container/TopContainer/TopRow/Mana
 onready var Attack = $OuterContainer/Container/BottomContainer/BottomRow/Attack
@@ -12,10 +12,14 @@ onready var SpritePopup = $EditPopup/Container/Sprite
 onready var NamePopup = $EditPopup/Container/Name
 onready var ManaPopup = $EditPopup/Container/Mana
 onready var AttackPopup = $EditPopup/Container/Attack
+onready var AttackLabel = $EditPopup/Container/AttackLabel
+onready var HpLabel = $EditPopup/Container/HpLabel
 onready var HpPopup = $EditPopup/Container/Hp
 onready var MaxTurnsPopup = $EditPopup/Container/MaxTurns
+onready var MaxTurnsLabel = $EditPopup/Container/MaxTurnsLabel
 
 signal edited(old_name, new_card)
+signal deleted(old_name)
 
 var card = null
 
@@ -26,7 +30,7 @@ func _ready():
 
 func init(params):
 	card = params
-	Sprite.texture = load(params.image)
+	Sprite_obj.texture = load(params.image)
 	Name.text = str(params.name)
 	Mana.text = str(params.mana)
 	if params.has("attack"):
@@ -45,6 +49,12 @@ func init(params):
 		MaxTurns.text = "Turns: " + str(params.max_turns)
 	else:
 		MaxTurns.hide()
+	EditPopup.add_button("Delete", true, "delete_pressed")
+
+
+func delete_card():
+	emit_signal("deleted", card.name)
+	queue_free()
 
 
 func _on_InventoryCard_gui_input(event):
@@ -57,16 +67,19 @@ func _on_InventoryCard_gui_input(event):
 		elif card.has("damage"):
 			AttackPopup.text = str(card.damage)
 		else:
+			AttackLabel.hide()
 			AttackPopup.hide()
 		if card.has("hp"):
 			HpPopup.text = str(card.hp)
 		elif card.has("heal"):
 			HpPopup.text = str(card.heal)
 		else:
+			HpLabel.hide()		
 			HpPopup.hide()
 		if card.has("max_turns"):
 			MaxTurnsPopup.text = str(card.max_turns)
 		else:
+			MaxTurnsLabel.hide()			
 			MaxTurnsPopup.hide()
 		EditPopup.popup_centered()
 
@@ -90,3 +103,9 @@ func _on_EditPopup_confirmed():
 	var old_name = card.name
 	init(new_card)
 	emit_signal("edited", old_name, new_card)
+
+
+func _on_EditPopup_custom_action(action):
+	if action == "delete_pressed":
+		delete_card()
+		EditPopup.hide()

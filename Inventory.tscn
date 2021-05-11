@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Inventory.gd" type="Script" id=1]
 [ext_resource path="res://Bebas.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Bebas_medium.tres" type="DynamicFont" id=3]
 
 [node name="Inventory" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CardsContainer" type="ScrollContainer" parent="."]
 margin_right = 1920.0
@@ -22,13 +26,184 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 6
 
-[node name="Back" type="Button" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_top = 1035.0
-margin_right = 67.0
+margin_right = 1920.0
 margin_bottom = 1080.0
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 1684.0
+margin_right = 1801.0
+margin_bottom = 45.0
+custom_constants/margin_right = 50
+
+[node name="Back" type="Button" parent="HBoxContainer/MarginContainer"]
+margin_right = 67.0
+margin_bottom = 45.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 text = "Back"
 
-[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
+[node name="Create" type="Button" parent="HBoxContainer"]
+margin_left = 1805.0
+margin_right = 1920.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "Add Card"
+
+[node name="CreatePopup" type="AcceptDialog" parent="."]
+margin_top = 466.0
+margin_right = 290.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 290, 0 )
+size_flags_vertical = 0
+window_title = "Create"
+
+[node name="Container" type="VBoxContainer" parent="CreatePopup"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 282.0
+margin_bottom = 578.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CreatePopup/Container"]
+margin_right = 274.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+text = "Name"
+
+[node name="Name" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 28.0
+margin_right = 274.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "My card"
+
+[node name="Label2" type="Label" parent="CreatePopup/Container"]
+margin_top = 82.0
+margin_right = 274.0
+margin_bottom = 106.0
+custom_fonts/font = ExtResource( 3 )
+text = "Mana"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mana" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 110.0
+margin_right = 274.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "3"
+
+[node name="Label3" type="Label" parent="CreatePopup/Container"]
+margin_top = 164.0
+margin_right = 274.0
+margin_bottom = 188.0
+custom_fonts/font = ExtResource( 3 )
+text = "Attack"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 192.0
+margin_right = 274.0
+margin_bottom = 242.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "3"
+
+[node name="Label4" type="Label" parent="CreatePopup/Container"]
+margin_top = 246.0
+margin_right = 274.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 3 )
+text = "Hp"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hp" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 274.0
+margin_right = 274.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "3"
+
+[node name="Label5" type="Label" parent="CreatePopup/Container"]
+margin_top = 328.0
+margin_right = 274.0
+margin_bottom = 352.0
+custom_fonts/font = ExtResource( 3 )
+text = "Sprite"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 356.0
+margin_right = 274.0
+margin_bottom = 406.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "res://something.png"
+
+[node name="Label6" type="Label" parent="CreatePopup/Container"]
+margin_top = 410.0
+margin_right = 274.0
+margin_bottom = 434.0
+custom_fonts/font = ExtResource( 3 )
+text = "Turns"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxTurns" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 438.0
+margin_right = 274.0
+margin_bottom = 488.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label7" type="Label" parent="CreatePopup/Container"]
+margin_top = 492.0
+margin_right = 274.0
+margin_bottom = 516.0
+custom_fonts/font = ExtResource( 3 )
+text = "type"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type" type="LineEdit" parent="CreatePopup/Container"]
+margin_top = 520.0
+margin_right = 274.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+placeholder_text = "spell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="HBoxContainer/Create" to="." method="_on_Create_pressed"]
+[connection signal="confirmed" from="CreatePopup" to="." method="_on_CreatePopup_confirmed"]

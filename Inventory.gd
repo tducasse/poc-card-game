@@ -1,7 +1,16 @@
 extends VBoxContainer
 
 onready var Cards = $CardsContainer/Cards
+onready var CreatePopup = $CreatePopup
 var Card = preload("res://InventoryCard.tscn")
+
+onready var Name = $CreatePopup/Container/Name
+onready var Mana = $CreatePopup/Container/Mana
+onready var Attack = $CreatePopup/Container/Attack
+onready var Hp = $CreatePopup/Container/Hp
+onready var Type = $CreatePopup/Container/Type
+onready var MaxTurns = $CreatePopup/Container/MaxTurns
+onready var Sprite_obj = $CreatePopup/Container/Sprite
 
 var cards = []
 
@@ -35,7 +44,8 @@ func _ready():
 func add_card(card):
 	var card_instance = Card.instance()
 	Cards.add_child(card_instance)
-	card_instance.connect("edited", self, "card_edited")
+	var _signal = card_instance.connect("edited", self, "card_edited")
+	var _signal2 = card_instance.connect("deleted", self, "card_deleted")
 	card_instance.init(card.duplicate())
 
 
@@ -48,7 +58,15 @@ func card_edited(old_name, new_card):
 					card[key] = new_card[key]
 			break
 	save_as_json("res://cards.json", cards)
-
+	
+	
+func card_deleted(old_name):
+	for index in len(cards):
+		var card = cards[index]
+		if card.name == old_name:
+			cards.remove(index)
+			break
+	save_as_json("res://cards.json", cards)
 
 
 func add_cards():
@@ -63,3 +81,41 @@ func _on_Back_pressed():
 	root_node.remove_child(inventory_node)
 	inventory_node.call_deferred("free")
 	root_node.add_child(lobby.instance())
+
+
+func _on_Create_pressed():
+	CreatePopup.popup_centered()
+
+
+func _on_CreatePopup_confirmed():
+	var card = {}
+	var type = Type.text.to_lower()
+	if not type == '':
+		card["type"] = Type.text
+	if type == "spell":
+		if not Attack.text == '':
+			card["damage"] = int(Attack.text)
+		if not Hp.text == '':
+			card["heal"] = int(Hp.text)
+	else:
+		if not Attack.text == '':
+			card["attack"] = int(Attack.text)
+		if not Hp.text == '':
+			card["hp"] = int(Hp.text)
+	if not MaxTurns.text == '':
+		card["max_turns"] = int(MaxTurns.text)
+	if not Name.text == '':
+		card["name"] = Name.text
+	else:
+		card["name"] = "No name"
+	if not Sprite_obj.text == '':
+		card["image"] = Sprite_obj.text
+	else:
+		card["image"] = "res://icon.png"
+	if not Mana.text == '':
+		card["mana"] = int(Mana.text)
+	else:
+		card["mana"] = 0
+	cards.append(card)
+	add_card(card)
+	save_as_json("res://cards.json", cards)

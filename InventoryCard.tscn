@@ -26,14 +26,14 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
-margin_bottom = 542.0
+margin_bottom = 490.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="OuterContainer" type="VBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
-margin_bottom = 542.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 290, 480 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,7 +41,7 @@ __meta__ = {
 
 [node name="Container" type="VBoxContainer" parent="OuterContainer"]
 margin_right = 290.0
-margin_bottom = 532.0
+margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -82,16 +82,16 @@ position = Vector2( 150, 240 )
 texture = SubResource( 2 )
 
 [node name="Filler" type="Label" parent="OuterContainer/Container"]
-margin_top = 247.0
+margin_top = 221.0
 margin_right = 290.0
-margin_bottom = 261.0
+margin_bottom = 235.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="OuterContainer/Container"]
-margin_top = 429.0
+margin_top = 377.0
 margin_right = 290.0
-margin_bottom = 468.0
+margin_bottom = 416.0
 custom_constants/margin_right = 20
 custom_constants/margin_left = 20
 
@@ -103,9 +103,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "turns: 1"
 
 [node name="BottomContainer" type="MarginContainer" parent="OuterContainer/Container"]
-margin_top = 472.0
+margin_top = 420.0
 margin_right = 290.0
-margin_bottom = 532.0
+margin_bottom = 480.0
 custom_constants/margin_right = 20
 custom_constants/margin_left = 20
 
@@ -150,7 +150,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="EditPopup/Container"]
+[node name="NameLabel" type="Label" parent="EditPopup/Container"]
 margin_right = 274.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 3 )
@@ -165,7 +165,7 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Name"
 
-[node name="Label2" type="Label" parent="EditPopup/Container"]
+[node name="ManaLabel" type="Label" parent="EditPopup/Container"]
 margin_top = 82.0
 margin_right = 274.0
 margin_bottom = 106.0
@@ -184,7 +184,7 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "4"
 
-[node name="Label3" type="Label" parent="EditPopup/Container"]
+[node name="AttackLabel" type="Label" parent="EditPopup/Container"]
 margin_top = 164.0
 margin_right = 274.0
 margin_bottom = 188.0
@@ -203,7 +203,7 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "4"
 
-[node name="Label4" type="Label" parent="EditPopup/Container"]
+[node name="HpLabel" type="Label" parent="EditPopup/Container"]
 margin_top = 246.0
 margin_right = 274.0
 margin_bottom = 270.0
@@ -222,7 +222,7 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "4"
 
-[node name="Label5" type="Label" parent="EditPopup/Container"]
+[node name="SpriteLabel" type="Label" parent="EditPopup/Container"]
 margin_top = 328.0
 margin_right = 274.0
 margin_bottom = 352.0
@@ -240,7 +240,7 @@ rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 2 )
 text = "res://something"
 
-[node name="Label6" type="Label" parent="EditPopup/Container"]
+[node name="MaxTurnsLabel" type="Label" parent="EditPopup/Container"]
 margin_top = 410.0
 margin_right = 274.0
 margin_bottom = 434.0
@@ -263,3 +263,4 @@ __meta__ = {
 
 [connection signal="gui_input" from="." to="." method="_on_InventoryCard_gui_input"]
 [connection signal="confirmed" from="EditPopup" to="." method="_on_EditPopup_confirmed"]
+[connection signal="custom_action" from="EditPopup" to="." method="_on_EditPopup_custom_action"]
