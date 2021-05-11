@@ -4,9 +4,9 @@
 [ext_resource path="res://Bebas.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Bebas_medium.tres" type="DynamicFont" id=3]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id=2]
 size = Vector2( 128, 128 )
 
 [node name="InventoryCard" type="MarginContainer"]
@@ -26,14 +26,14 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
-margin_bottom = 490.0
-custom_styles/panel = SubResource( 2 )
+margin_bottom = 542.0
+custom_styles/panel = SubResource( 1 )
 
 [node name="OuterContainer" type="VBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
-margin_bottom = 490.0
+margin_bottom = 542.0
 rect_min_size = Vector2( 290, 480 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,7 +41,7 @@ __meta__ = {
 
 [node name="Container" type="VBoxContainer" parent="OuterContainer"]
 margin_right = 290.0
-margin_bottom = 480.0
+margin_bottom = 532.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -79,19 +79,33 @@ valign = 1
 
 [node name="Sprite" type="Sprite" parent="OuterContainer/Container"]
 position = Vector2( 150, 240 )
-texture = SubResource( 1 )
+texture = SubResource( 2 )
 
 [node name="Filler" type="Label" parent="OuterContainer/Container"]
-margin_top = 243.0
+margin_top = 247.0
 margin_right = 290.0
-margin_bottom = 257.0
+margin_bottom = 261.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
-[node name="BottomContainer" type="MarginContainer" parent="OuterContainer/Container"]
-margin_top = 420.0
+[node name="MarginContainer" type="MarginContainer" parent="OuterContainer/Container"]
+margin_top = 429.0
 margin_right = 290.0
-margin_bottom = 480.0
+margin_bottom = 468.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="MaxTurns" type="Label" parent="OuterContainer/Container/MarginContainer"]
+margin_left = 20.0
+margin_right = 270.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 2 )
+text = "turns: 1"
+
+[node name="BottomContainer" type="MarginContainer" parent="OuterContainer/Container"]
+margin_top = 472.0
+margin_right = 290.0
+margin_bottom = 532.0
 custom_constants/margin_right = 20
 custom_constants/margin_left = 20
 
@@ -122,15 +136,14 @@ align = 2
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
-margin_bottom = 490.0
-popup_exclusive = true
+margin_bottom = 542.0
 window_title = "Edit"
 
 [node name="Container" type="VBoxContainer" parent="EditPopup"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 282.0
-margin_bottom = 444.0
+margin_bottom = 496.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -226,6 +239,27 @@ margin_bottom = 406.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 2 )
 text = "res://something"
+
+[node name="Label6" type="Label" parent="EditPopup/Container"]
+margin_top = 410.0
+margin_right = 274.0
+margin_bottom = 434.0
+custom_fonts/font = ExtResource( 3 )
+text = "Turns"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxTurns" type="LineEdit" parent="EditPopup/Container"]
+margin_top = 438.0
+margin_right = 274.0
+margin_bottom = 488.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="gui_input" from="." to="." method="_on_InventoryCard_gui_input"]
 [connection signal="confirmed" from="EditPopup" to="." method="_on_EditPopup_confirmed"]

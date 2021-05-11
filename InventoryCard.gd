@@ -6,12 +6,14 @@ onready var Name = $OuterContainer/Container/TopContainer/TopRow/Name
 onready var Mana = $OuterContainer/Container/TopContainer/TopRow/Mana
 onready var Attack = $OuterContainer/Container/BottomContainer/BottomRow/Attack
 onready var Hp = $OuterContainer/Container/BottomContainer/BottomRow/Hp
+onready var MaxTurns = $OuterContainer/Container/MarginContainer/MaxTurns
 onready var EditPopup = $EditPopup
 onready var SpritePopup = $EditPopup/Container/Sprite
 onready var NamePopup = $EditPopup/Container/Name
 onready var ManaPopup = $EditPopup/Container/Mana
 onready var AttackPopup = $EditPopup/Container/Attack
 onready var HpPopup = $EditPopup/Container/Hp
+onready var MaxTurnsPopup = $EditPopup/Container/MaxTurns
 
 signal edited(old_name, new_card)
 
@@ -39,6 +41,10 @@ func init(params):
 		Hp.text = str(params.heal)
 	else:
 		Hp.hide()
+	if params.has("max_turns"):
+		MaxTurns.text = "Turns: " + str(params.max_turns)
+	else:
+		MaxTurns.hide()
 
 
 func _on_InventoryCard_gui_input(event):
@@ -58,6 +64,10 @@ func _on_InventoryCard_gui_input(event):
 			HpPopup.text = str(card.heal)
 		else:
 			HpPopup.hide()
+		if card.has("max_turns"):
+			MaxTurnsPopup.text = str(card.max_turns)
+		else:
+			MaxTurnsPopup.hide()
 		EditPopup.popup_centered()
 
 
@@ -65,11 +75,10 @@ func _on_EditPopup_confirmed():
 	var new_card = {
 		"name": NamePopup.text,
 		"mana": int(ManaPopup.text),
-		"image": SpritePopup.text,
-		"type": card.type
+		"image": SpritePopup.text
 	}
 	if card.has("max_turns"):
-		new_card["max_turns"] = int(card.max_turns)
+		new_card["max_turns"] = int(MaxTurnsPopup.text)
 	if card.has("attack"):
 		new_card["attack"] = int(AttackPopup.text)
 	if card.has("damage"):
