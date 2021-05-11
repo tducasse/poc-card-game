@@ -21,6 +21,8 @@ func init(idx, loc, opp = false):
 
 func move_card(hidden=false):
 	var params = GM.selected_card.params
+	if location == "board" && GM.selected_card.params.type == "spell":
+		return
 	if location == "board" && GM.selected_card.slot.location == "hand" && not opponent:
 		if GM.mana >= params.current_mana:
 			GM.emit_signal("lose_mana", params.current_mana)

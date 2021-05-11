@@ -22,5 +22,19 @@
     "image": "res://icon.png",
     "mana": 3,
     "max_turns": 1
+  },
+  {
+    "name": "Damage spell",
+    "image": "res://icon.png",
+    "mana": 1,
+    "damage": 1,
+    "type": "spell"
+  },
+  {
+    "name": "Heal spell",
+    "image": "res://icon.png",
+    "mana": 1,
+    "heal": 1,
+    "type": "spell"
   }
 ]

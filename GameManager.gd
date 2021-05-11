@@ -17,6 +17,9 @@ signal opponent_move_card(old_loc, old_idx, new_loc, new_idx)
 signal opponent_attacked(attackerPath, attackedPath)
 
 # warning-ignore:unused_signal
+signal opponent_healed(attackerPath, attackedPath)
+
+# warning-ignore:unused_signal
 signal opponent_lose_hp(lost)
 
 # warning-ignore:unused_signal

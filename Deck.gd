@@ -24,20 +24,66 @@ func _ready():
 	cards = load_json_file("res://cards.json")
 
 
+func make_default_card(card):
+	return {
+			"name": card.name,
+			"attack": card.attack,
+			"hp": card.hp,
+			"image": card.image,
+			"mana": card.mana,
+			"current_attack": card.attack,
+			"current_hp": card.hp,
+			"current_mana": card.mana,
+			"max_turns": card.max_turns,
+			"current_turns": card.max_turns,
+			"type": "default"
+		}
+
+
+func make_damage_spell(card):
+	return {
+			"name": card.name,
+			"image": card.image,
+			"mana": card.mana,
+			"current_mana": card.mana,
+			"damage": card.damage,
+			"current_damage": card.damage,
+			"type": card.type,
+			"max_turns": 1,
+			"current_turns": 1,
+		}
+		
+func make_heal_spell(card):
+	return {
+			"name": card.name,
+			"image": card.image,
+			"mana": card.mana,
+			"current_mana": card.mana,
+			"heal": card.heal,
+			"current_heal": card.heal,
+			"type": card.type,
+			"max_turns": 1,
+			"current_turns": 1,
+		}
+
+
+func make_spell(card):
+	if card.has("damage"):
+		return make_damage_spell(card)
+	elif card.has("heal"):
+		return make_heal_spell(card)
+
+
+func make_card(card):
+	if not card.has("type"):
+		return make_default_card(card)
+	if card.type == "spell":
+		return make_spell(card)
+
+
 func pick_random_card():
 	var card = cards[randi() % cards.size()]
-	var copyCard = {
-		"name": card.name,
-		"attack": card.attack,
-		"hp": card.hp,
-		"image": card.image,
-		"mana": card.mana,
-		"current_attack": card.attack,
-		"current_hp": card.hp,
-		"current_mana": card.mana,
-		"max_turns": card.max_turns,
-		"current_turns": card.max_turns
-	}
+	var copyCard = make_card(card)
 	return copyCard
 
 
