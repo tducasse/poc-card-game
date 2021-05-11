@@ -24,6 +24,7 @@ margin_bottom = 600.0
 margin_left = 770.0
 margin_right = 878.0
 margin_bottom = 600.0
+dragger_visibility = 1
 
 [node name="PlayerMana" parent="PlayerData" instance=ExtResource( 4 )]
 margin_top = 280.0
