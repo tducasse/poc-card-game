@@ -9,6 +9,7 @@ onready var host = $host
 onready var join = $join
 onready var connection_status = $connection_status
 onready var game = preload("res://GameBoard.tscn")
+onready var inventory = preload("res://Inventory.tscn")
 
 var my_id = 0
 
@@ -116,3 +117,12 @@ remotesync func goto_game():
 	lobby_node.call_deferred("free")
 	root_node.add_child(game_instance)
 	GM.emit_signal("start_game")
+
+
+func _on_Inventory_pressed():
+	var inventory_instance = inventory.instance()
+	var root_node = get_tree().get_root()
+	var lobby_node = get_node("/root/Lobby")
+	root_node.remove_child(lobby_node)
+	lobby_node.call_deferred("free")
+	root_node.add_child(inventory_instance)

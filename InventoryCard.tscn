@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://InventoryCard.gd" type="Script" id=1]
+[ext_resource path="res://Bebas.tres" type="DynamicFont" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="ImageTexture" id=1]
+size = Vector2( 128, 128 )
+
+[node name="InventoryCard" type="MarginContainer"]
+margin_top = 480.0
+margin_right = 300.0
+margin_bottom = 480.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 320.0
+margin_bottom = 510.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="OuterContainer" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 320.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 290, 480 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="OuterContainer"]
+margin_right = 310.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TopContainer" type="MarginContainer" parent="OuterContainer/Container"]
+margin_right = 310.0
+margin_bottom = 80.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="TopRow" type="HBoxContainer" parent="OuterContainer/Container/TopContainer"]
+margin_left = 20.0
+margin_right = 290.0
+margin_bottom = 80.0
+
+[node name="Name" type="Label" parent="OuterContainer/Container/TopContainer/TopRow"]
+margin_right = 133.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Name"
+valign = 1
+autowrap = true
+
+[node name="Mana" type="Label" parent="OuterContainer/Container/TopContainer/TopRow"]
+margin_left = 137.0
+margin_right = 270.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "4"
+align = 2
+valign = 1
+
+[node name="Sprite" type="Sprite" parent="OuterContainer/Container"]
+position = Vector2( 150, 240 )
+texture = SubResource( 1 )
+
+[node name="Filler" type="Label" parent="OuterContainer/Container"]
+margin_top = 253.0
+margin_right = 310.0
+margin_bottom = 267.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="BottomContainer" type="MarginContainer" parent="OuterContainer/Container"]
+margin_top = 440.0
+margin_right = 310.0
+margin_bottom = 500.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="BottomRow" type="HBoxContainer" parent="OuterContainer/Container/BottomContainer"]
+margin_left = 20.0
+margin_right = 290.0
+margin_bottom = 60.0
+
+[node name="Attack" type="Label" parent="OuterContainer/Container/BottomContainer/BottomRow"]
+margin_right = 133.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "4"
+
+[node name="Hp" type="Label" parent="OuterContainer/Container/BottomContainer/BottomRow"]
+margin_left = 137.0
+margin_right = 270.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "4"
+align = 2
