@@ -44,9 +44,9 @@ func move_card(hidden=false):
 
 func cast_aoe(aoe):
 	if aoe.has("damage"):
-		GM.emit_signal("cast_aoe_damage", aoe.damage)
+		GM.emit_signal("cast_aoe_damage", aoe.current_damage)
 	if aoe.has("heal"):
-		GM.emit_signal("cast_aoe_heal", aoe.heal)
+		GM.emit_signal("cast_aoe_heal", aoe.current_heal)
 
 
 func put_card(new_card, card_params, _opponent=false, hidden=false):

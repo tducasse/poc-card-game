@@ -21,6 +21,8 @@ signal opponent_healed(attackerPath, attackedPath)
 
 # warning-ignore:unused_signal
 signal opponent_lose_hp(lost)
+# warning-ignore:unused_signal
+signal opponent_add_hp(add)
 
 # warning-ignore:unused_signal
 signal game_over()
@@ -42,9 +44,9 @@ signal end_turn()
 signal start_turn()
 
 # warning-ignore:unused_signal
-signal cast_aoe_damage()
+signal cast_aoe_damage(damage)
 # warning-ignore:unused_signal
-signal cast_aoe_heal()
+signal cast_aoe_heal(heal)
 
 var mana = 0
 var mana_max = 0
