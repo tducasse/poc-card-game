@@ -30,10 +30,16 @@ margin_right = 1920.0
 margin_bottom = 793.0
 
 [node name="Boards" parent="Playground" index="0"]
-margin_left = 577.0
+margin_left = 346.0
 margin_top = 11.0
-margin_right = 1343.0
+margin_right = 1574.0
 margin_bottom = 495.0
+
+[node name="OpponentBoard" parent="Playground/Boards" index="0"]
+margin_right = 1228.0
+
+[node name="PlayerBoard" parent="Playground/Boards" index="1"]
+margin_right = 1228.0
 
 [node name="PlayerBoard" parent="." instance=ExtResource( 1 )]
 margin_top = 797.0

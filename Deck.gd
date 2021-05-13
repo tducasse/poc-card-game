@@ -25,46 +25,38 @@ func _ready():
 
 
 func make_default_card(card):
-	return {
-			"name": card.name,
-			"attack": card.attack,
-			"hp": card.hp,
-			"image": card.image,
-			"mana": card.mana,
-			"current_attack": card.attack,
-			"current_hp": card.hp,
-			"current_mana": card.mana,
-			"max_turns": card.max_turns,
-			"current_turns": card.max_turns,
-			"type": "default"
-		}
+	var new_card = card.duplicate()
+	new_card["current_mana"] = card.mana
+	new_card["current_attack"] = card.attack
+	new_card["current_hp"] = card.hp
+	new_card["current_turns"] = card.max_turns
+	new_card["type"] = "default"
+	return new_card
 
 
 func make_damage_spell(card):
-	return {
-			"name": card.name,
-			"image": card.image,
-			"mana": card.mana,
-			"current_mana": card.mana,
-			"damage": card.damage,
-			"current_damage": card.damage,
-			"type": card.type,
-			"max_turns": 1,
-			"current_turns": 1,
-		}
-		
+	var new_card = card.duplicate()
+	new_card["current_mana"] = card.mana
+	new_card["current_damage"] = card.damage
+	new_card["max_turns"] = 1
+	new_card["current_turns"] = 1
+	return new_card
+
+
 func make_heal_spell(card):
-	return {
-			"name": card.name,
-			"image": card.image,
-			"mana": card.mana,
-			"current_mana": card.mana,
-			"heal": card.heal,
-			"current_heal": card.heal,
-			"type": card.type,
-			"max_turns": 1,
-			"current_turns": 1,
-		}
+	var new_card = card.duplicate()
+	new_card["current_mana"] = card.mana
+	new_card["current_heal"] = card.heal
+	new_card["max_turns"] = 1
+	new_card["current_turns"] = 1
+	return new_card
+
+
+func make_aoe(card):
+	if card.has("damage"):
+		return make_damage_spell(card)
+	elif card.has("heal"):
+		return make_heal_spell(card)	
 
 
 func make_spell(card):
@@ -79,6 +71,8 @@ func make_card(card):
 		return make_default_card(card)
 	if card.type == "spell":
 		return make_spell(card)
+	if card.type == "aoe":
+		return make_aoe(card)
 
 
 func pick_random_card():

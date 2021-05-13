@@ -92,7 +92,7 @@ func _on_CreatePopup_confirmed():
 	var type = Type.text.to_lower()
 	if not type == '':
 		card["type"] = Type.text
-	if type == "spell":
+	if type == "spell" or type == "aoe":
 		if not Attack.text == '':
 			card["damage"] = int(Attack.text)
 		if not Hp.text == '':

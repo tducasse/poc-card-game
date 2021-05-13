@@ -36,3 +36,18 @@ margin_bottom = 600.0
 margin_left = 616.0
 margin_right = 766.0
 margin_bottom = 600.0
+
+[node name="CardSlot6" parent="." instance=ExtResource( 1 )]
+margin_left = 770.0
+margin_right = 920.0
+margin_bottom = 600.0
+
+[node name="CardSlot7" parent="." instance=ExtResource( 1 )]
+margin_left = 924.0
+margin_right = 1074.0
+margin_bottom = 600.0
+
+[node name="CardSlot8" parent="." instance=ExtResource( 1 )]
+margin_left = 1078.0
+margin_right = 1228.0
+margin_bottom = 600.0

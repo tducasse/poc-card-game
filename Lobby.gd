@@ -9,6 +9,7 @@ onready var host = $host
 onready var join = $join
 onready var connection_status = $connection_status
 onready var game = preload("res://GameBoard.tscn")
+onready var inventory_button = $Inventory
 onready var inventory = preload("res://Inventory.tscn")
 
 var my_id = 0
@@ -94,6 +95,7 @@ func update_players():
 func hide_join_host_buttons() :
 	join.visible = false
 	host.visible = false
+	inventory_button.visible = false
 
 
 remotesync func goto_game():

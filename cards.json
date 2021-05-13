@@ -36,5 +36,19 @@
     "mana": 1,
     "heal": 1,
     "type": "spell"
+  },
+   {
+    "type": "aoe",
+    "heal": 1,
+    "name": "AOE HEAL",
+    "image": "res://icon.png",
+    "mana": 0
+  },
+  {
+    "type": "aoe",
+    "damage": 1,
+    "name": "aoe damage",
+    "image": "res://icon.png",
+    "mana": 0
   }
-]
+ ]

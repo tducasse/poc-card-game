@@ -41,6 +41,11 @@ signal end_turn()
 # warning-ignore:unused_signal
 signal start_turn()
 
+# warning-ignore:unused_signal
+signal cast_aoe_damage()
+# warning-ignore:unused_signal
+signal cast_aoe_heal()
+
 var mana = 0
 var mana_max = 0
 var opponent_mana = 0

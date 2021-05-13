@@ -17,12 +17,12 @@ __meta__ = {
 
 [node name="PlayerHand" parent="." instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_right = 766.0
+margin_right = 1536.0
 margin_bottom = 600.0
 
 [node name="PlayerData" type="VSplitContainer" parent="."]
-margin_left = 770.0
-margin_right = 878.0
+margin_left = 1540.0
+margin_right = 1648.0
 margin_bottom = 600.0
 dragger_visibility = 1
 
@@ -42,8 +42,8 @@ custom_fonts/font = ExtResource( 5 )
 text = "End turn"
 
 [node name="Deck" parent="." instance=ExtResource( 1 )]
-margin_left = 882.0
-margin_right = 1032.0
+margin_left = 1652.0
+margin_right = 1802.0
 margin_bottom = 600.0
 
 [connection signal="pressed" from="PlayerData/EndTurn" to="." method="_on_EndTurn_pressed"]

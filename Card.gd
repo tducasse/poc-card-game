@@ -21,7 +21,7 @@ func init(card_params, slot_item, hidden=false, _opponent=false):
 	if card_params.type == "default":
 		Attack.text = str(card_params.attack)
 		Hp.text = str(card_params.current_hp)
-	elif card_params.type == "spell":
+	elif card_params.type == "spell" or card_params.type == "aoe":
 		if card_params.has("damage"):
 			Attack.text = str(card_params.damage)
 			Hp.hide()

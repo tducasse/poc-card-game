@@ -14,7 +14,7 @@ __meta__ = {
 }
 
 [node name="Boards" type="VBoxContainer" parent="."]
-margin_right = 766.0
+margin_right = 1228.0
 margin_bottom = 484.0
 alignment = 2
 __meta__ = {
@@ -23,11 +23,11 @@ __meta__ = {
 
 [node name="OpponentBoard" parent="Boards" instance=ExtResource( 1 )]
 margin_top = 0.0
-margin_right = 766.0
+margin_right = 1228.0
 margin_bottom = 240.0
 opponent = true
 
 [node name="PlayerBoard" parent="Boards" instance=ExtResource( 1 )]
 margin_top = 244.0
-margin_right = 766.0
+margin_right = 1228.0
 margin_bottom = 484.0

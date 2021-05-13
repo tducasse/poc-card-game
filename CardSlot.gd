@@ -21,6 +21,11 @@ func init(idx, loc, opp = false):
 
 func move_card(hidden=false):
 	var params = GM.selected_card.params
+	if location == "board" && GM.selected_card.params.type == "aoe":
+		cast_aoe(params)
+		GM.selected_card.remove_card()
+		GM.emit_signal("card_unselected")
+		return
 	if location == "board" && GM.selected_card.params.type == "spell":
 		return
 	if location == "board" && GM.selected_card.slot.location == "hand" && not opponent:
@@ -35,6 +40,13 @@ func move_card(hidden=false):
 	var new_card = Card.instance()
 	put_card(new_card, params, false,  hidden)
 	GM.emit_signal("card_unselected")
+
+
+func cast_aoe(aoe):
+	if aoe.has("damage"):
+		GM.emit_signal("cast_aoe_damage", aoe.damage)
+	if aoe.has("heal"):
+		GM.emit_signal("cast_aoe_heal", aoe.heal)
 
 
 func put_card(new_card, card_params, _opponent=false, hidden=false):
