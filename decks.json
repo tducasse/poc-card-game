@@ -1,0 +1,25 @@
+[
+  {
+    "name": "custom deck 1",
+    "cards": [
+      "77271e72-92b0-4bd8-a54f-bdeeae352f49",
+      "a2b993ae-185c-4406-8ca0-f4b08bb4cca8",
+      "5bac6cd9-30dc-485f-a8c5-90fa2b2a7b48",
+      "eae9b66e-6bf5-4329-a503-388da705ca53",
+      "bc57c735-6e43-4281-b53e-c4306a2e9551",
+      "f32bdbc7-b59d-46e2-86a6-7bb8d05258bc",
+      "3124d6cb-c9f5-42e5-85a2-c0816e91673d"
+    ],
+    "uuid": "3c5bdccc-772b-46a9-8627-989d48117505"
+  },
+  {
+    "name": "only spells",
+    "cards": [
+      "eae9b66e-6bf5-4329-a503-388da705ca53",
+      "bc57c735-6e43-4281-b53e-c4306a2e9551",
+      "f32bdbc7-b59d-46e2-86a6-7bb8d05258bc",
+      "3124d6cb-c9f5-42e5-85a2-c0816e91673d"
+    ],
+    "uuid": "174bd2f7-a9bd-43fe-9737-7c1a5f351b93"
+  }
+]

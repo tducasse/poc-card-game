@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Bebas.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Decks.gd" type="Script" id=2]
+
+[node name="Decks" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="HBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1031.0
+size_flags_vertical = 3
+
+[node name="DeckList" type="VBoxContainer" parent="Main"]
+margin_right = 958.0
+margin_bottom = 1031.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/DeckList"]
+margin_right = 958.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "Decks"
+
+[node name="List" type="ItemList" parent="Main/DeckList"]
+margin_top = 43.0
+margin_right = 958.0
+margin_bottom = 1031.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+
+[node name="CardList" type="VBoxContainer" parent="Main"]
+margin_left = 962.0
+margin_right = 1920.0
+margin_bottom = 1031.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/CardList"]
+margin_right = 958.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 1 )
+text = "Cards"
+
+[node name="List" type="ItemList" parent="Main/CardList"]
+margin_top = 43.0
+margin_right = 958.0
+margin_bottom = 1031.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 1035.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 1843.0
+margin_right = 1920.0
+margin_bottom = 45.0
+custom_constants/margin_right = 10
+
+[node name="Back" type="Button" parent="HBoxContainer/MarginContainer"]
+margin_right = 67.0
+margin_bottom = 45.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+text = "Back"
+
+[connection signal="item_selected" from="Main/DeckList/List" to="." method="_on_List_item_selected"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/Back" to="." method="_on_Back_pressed"]

@@ -4,6 +4,7 @@ onready var Cards = $CardsContainer/Cards
 onready var CreatePopup = $CreatePopup
 var Card = preload("res://InventoryCard.tscn")
 const uuid_util = preload('res://uuid.gd')
+var json = preload("res://json.gd")
 
 onready var Name = $CreatePopup/Container/Name
 onready var Mana = $CreatePopup/Container/Mana
@@ -13,39 +14,18 @@ onready var Type = $CreatePopup/Container/Type
 onready var MaxTurns = $CreatePopup/Container/MaxTurns
 onready var Sprite_obj = $CreatePopup/Container/Sprite
 
+
 var cards = []
-
-func load_json_file(path):
-	var file = File.new()
-	file.open(path, file.READ)
-	var text = file.get_as_text()
-	var result_json = JSON.parse(text)
-	if result_json.error != OK:
-		print("[load_json_file] Error loading JSON file '" + str(path) + "'.")
-		print("\tError: ", result_json.error)
-		print("\tError Line: ", result_json.error_line)
-		print("\tError String: ", result_json.error_string)
-		return null
-	var obj = result_json.result
-	return obj
-	
-
-func save_as_json(path, data):
-	var file = File.new()
-	file.open(path, File.WRITE)
-	file.store_line(JSON.print(data ,"  "))
-	file.close()
-
 
 func save_cards():
 	for card in cards:
 		if not card.has('uuid'):
 			card["uuid"] = uuid_util.v4()
-	save_as_json("res://cards.json", cards)
+	json.save_as_json("res://cards.json", cards)
 
 
 func _ready():
-	cards = load_json_file("res://cards.json")
+	cards = json.load_json_file("res://cards.json")
 	save_cards()
 	add_cards()
 	

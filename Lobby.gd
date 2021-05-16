@@ -10,7 +10,9 @@ onready var join = $join
 onready var connection_status = $connection_status
 onready var game = preload("res://GameBoard.tscn")
 onready var inventory_button = $Inventory
+onready var decks_button = $Decks
 onready var inventory = preload("res://Inventory.tscn")
+onready var decks = preload("res://Decks.tscn")
 
 var my_id = 0
 
@@ -96,6 +98,7 @@ func hide_join_host_buttons() :
 	join.visible = false
 	host.visible = false
 	inventory_button.visible = false
+	decks_button.visible = false
 
 
 remotesync func goto_game():
@@ -128,3 +131,12 @@ func _on_Inventory_pressed():
 	root_node.remove_child(lobby_node)
 	lobby_node.call_deferred("free")
 	root_node.add_child(inventory_instance)
+
+
+func _on_Decks_pressed():
+	var decks_instance = decks.instance()
+	var root_node = get_tree().get_root()
+	var lobby_node = get_node("/root/Lobby")
+	root_node.remove_child(lobby_node)
+	lobby_node.call_deferred("free")
+	root_node.add_child(decks_instance)
