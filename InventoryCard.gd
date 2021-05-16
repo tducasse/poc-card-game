@@ -88,7 +88,7 @@ func _on_EditPopup_confirmed():
 	var new_card = {
 		"name": NamePopup.text,
 		"mana": int(ManaPopup.text),
-		"image": SpritePopup.text
+		"image": SpritePopup.text.to_lower()
 	}
 	if card.has("max_turns"):
 		new_card["max_turns"] = int(MaxTurnsPopup.text)

@@ -7,7 +7,6 @@
 [sub_resource type="StyleBoxFlat" id=1]
 
 [sub_resource type="ImageTexture" id=2]
-size = Vector2( 128, 128 )
 
 [node name="InventoryCard" type="MarginContainer"]
 margin_top = 480.0
@@ -79,6 +78,7 @@ valign = 1
 
 [node name="Sprite" type="Sprite" parent="OuterContainer/Container"]
 position = Vector2( 150, 240 )
+scale = Vector2( 2, 2 )
 texture = SubResource( 2 )
 
 [node name="Filler" type="Label" parent="OuterContainer/Container"]

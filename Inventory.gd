@@ -109,7 +109,7 @@ func _on_CreatePopup_confirmed():
 	else:
 		card["name"] = "No name"
 	if not Sprite_obj.text == '':
-		card["image"] = Sprite_obj.text
+		card["image"] = Sprite_obj.text.to_lower()
 	else:
 		card["image"] = "res://icon.png"
 	if not Mana.text == '':

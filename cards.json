@@ -2,7 +2,7 @@
   {
     "name": "Basic card",
     "mana": 1,
-    "image": "res://icon.png",
+    "image": "res://basic.png",
     "attack": 1,
     "hp": 1,
     "max_turns": 1
@@ -10,7 +10,7 @@
   {
     "name": "Advanced card",
     "mana": 2,
-    "image": "res://icon.png",
+    "image": "res://advanced.png",
     "max_turns": 1,
     "attack": 2,
     "hp": 2
@@ -18,7 +18,7 @@
   {
     "name": "Boss card",
     "mana": 3,
-    "image": "res://icon.png",
+    "image": "res://boss.png",
     "max_turns": 1,
     "attack": 3,
     "hp": 3
@@ -26,29 +26,29 @@
   {
     "name": "Damage spell",
     "mana": 1,
-    "image": "res://icon.png",
+    "image": "res://damage.png",
     "damage": 1,
     "type": "spell"
   },
   {
     "name": "Heal spell",
-    "image": "res://icon.png",
+    "image": "res://heal.png",
     "mana": 1,
     "heal": 1,
     "type": "spell"
   },
-   {
+  {
     "type": "aoe",
     "heal": 1,
     "name": "AOE HEAL",
-    "image": "res://icon.png",
+    "image": "res://aoe-heal.png",
     "mana": 0
   },
   {
     "type": "aoe",
     "damage": 1,
     "name": "aoe damage",
-    "image": "res://icon.png",
+    "image": "res://aoe-damage.png",
     "mana": 0
   }
- ]
+]
