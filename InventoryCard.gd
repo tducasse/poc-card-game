@@ -18,8 +18,8 @@ onready var HpPopup = $EditPopup/Container/Hp
 onready var MaxTurnsPopup = $EditPopup/Container/MaxTurns
 onready var MaxTurnsLabel = $EditPopup/Container/MaxTurnsLabel
 
-signal edited(old_name, new_card)
-signal deleted(old_name)
+signal edited(new_card)
+signal deleted(uuid)
 
 var card = null
 
@@ -53,7 +53,7 @@ func init(params):
 
 
 func delete_card():
-	emit_signal("deleted", card.name)
+	emit_signal("deleted", card.uuid)
 	queue_free()
 
 
@@ -88,7 +88,8 @@ func _on_EditPopup_confirmed():
 	var new_card = {
 		"name": NamePopup.text,
 		"mana": int(ManaPopup.text),
-		"image": SpritePopup.text.to_lower()
+		"image": SpritePopup.text.to_lower(),
+		"uuid": card.uuid
 	}
 	if card.has("max_turns"):
 		new_card["max_turns"] = int(MaxTurnsPopup.text)
@@ -100,9 +101,8 @@ func _on_EditPopup_confirmed():
 		new_card["hp"] = int(HpPopup.text)
 	if card.has("heal"):
 		new_card["heal"] = int(HpPopup.text)
-	var old_name = card.name
 	init(new_card)
-	emit_signal("edited", old_name, new_card)
+	emit_signal("edited", new_card)
 
 
 func _on_EditPopup_custom_action(action):

@@ -3,6 +3,7 @@ extends VBoxContainer
 onready var Cards = $CardsContainer/Cards
 onready var CreatePopup = $CreatePopup
 var Card = preload("res://InventoryCard.tscn")
+const uuid_util = preload('res://uuid.gd')
 
 onready var Name = $CreatePopup/Container/Name
 onready var Mana = $CreatePopup/Container/Mana
@@ -36,8 +37,16 @@ func save_as_json(path, data):
 	file.close()
 
 
+func save_cards():
+	for card in cards:
+		if not card.has('uuid'):
+			card["uuid"] = uuid_util.v4()
+	save_as_json("res://cards.json", cards)
+
+
 func _ready():
 	cards = load_json_file("res://cards.json")
+	save_cards()
 	add_cards()
 	
 	
@@ -49,24 +58,24 @@ func add_card(card):
 	card_instance.init(card.duplicate())
 
 
-func card_edited(old_name, new_card):
+func card_edited(new_card):
 	for index in len(cards):
 		var card = cards[index]
-		if card.name == old_name:
+		if card.uuid == new_card.uuid:
 			for key in card.keys():
 				if new_card.has(key) and not card[key] == new_card[key]:
 					card[key] = new_card[key]
 			break
-	save_as_json("res://cards.json", cards)
+	save_cards()
 	
 	
-func card_deleted(old_name):
+func card_deleted(uuid):
 	for index in len(cards):
 		var card = cards[index]
-		if card.name == old_name:
+		if card.uuid == uuid:
 			cards.remove(index)
 			break
-	save_as_json("res://cards.json", cards)
+	save_cards()
 
 
 func add_cards():
@@ -116,6 +125,7 @@ func _on_CreatePopup_confirmed():
 		card["mana"] = int(Mana.text)
 	else:
 		card["mana"] = 0
+	card["uuid"] = uuid_util.v4()
 	cards.append(card)
 	add_card(card)
-	save_as_json("res://cards.json", cards)
+	save_cards()

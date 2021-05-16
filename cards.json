@@ -5,7 +5,8 @@
     "image": "res://basic.png",
     "attack": 1,
     "hp": 1,
-    "max_turns": 1
+    "max_turns": 1,
+    "uuid": "77271e72-92b0-4bd8-a54f-bdeeae352f49"
   },
   {
     "name": "Advanced card",
@@ -13,7 +14,8 @@
     "image": "res://advanced.png",
     "max_turns": 1,
     "attack": 2,
-    "hp": 2
+    "hp": 2,
+    "uuid": "a2b993ae-185c-4406-8ca0-f4b08bb4cca8"
   },
   {
     "name": "Boss card",
@@ -21,34 +23,39 @@
     "image": "res://boss.png",
     "max_turns": 1,
     "attack": 3,
-    "hp": 3
+    "hp": 3,
+    "uuid": "5bac6cd9-30dc-485f-a8c5-90fa2b2a7b48"
   },
   {
     "name": "Damage spell",
     "mana": 1,
     "image": "res://damage.png",
     "damage": 1,
-    "type": "spell"
+    "type": "spell",
+    "uuid": "eae9b66e-6bf5-4329-a503-388da705ca53"
   },
   {
     "name": "Heal spell",
     "image": "res://heal.png",
     "mana": 1,
     "heal": 1,
-    "type": "spell"
+    "type": "spell",
+    "uuid": "bc57c735-6e43-4281-b53e-c4306a2e9551"
   },
   {
     "type": "aoe",
     "heal": 1,
     "name": "AOE HEAL",
     "image": "res://aoe-heal.png",
-    "mana": 0
+    "mana": 0,
+    "uuid": "f32bdbc7-b59d-46e2-86a6-7bb8d05258bc"
   },
   {
     "type": "aoe",
     "damage": 1,
     "name": "aoe damage",
     "image": "res://aoe-damage.png",
-    "mana": 0
+    "mana": 0,
+    "uuid": "3124d6cb-c9f5-42e5-85a2-c0816e91673d"
   }
 ]
